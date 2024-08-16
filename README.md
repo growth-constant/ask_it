@@ -1,7 +1,6 @@
 # Ask It
 
-[![Code Climate](https://codeclimate.com/github/dr-click/survey.png)](https://codeclimate.com/github/dr-click/questionnaire)
-### Ask It on Rails...
+[![Maintainability](https://api.codeclimate.com/v1/badges/74596429080573c6b707/maintainability)](https://codeclimate.com/github/growth-constant/ask_it/maintainability)
 
 Ask It is a Rails Engine that brings multi types of quizzes, surveys and contests into your Rails
 application. Ask It models were designed to be flexible enough in order to be extended and

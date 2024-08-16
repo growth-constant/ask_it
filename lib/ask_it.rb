@@ -1,0 +1,2 @@
+module AskIt
+end

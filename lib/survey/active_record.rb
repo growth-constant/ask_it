@@ -6,7 +6,7 @@ module Survey
 
     module ClassMethods
       def has_surveys
-        has_many :survey_attempts, as: :participant, class_name: 'Survey::Attempt'
+        has_many :survey_attempts, as: :participant, class_name: 'AskIt::Attempt'
 
         define_method('for_survey') do |survey|
           survey_attempts.where(survey_id: survey.id)
@@ -14,11 +14,11 @@ module Survey
       end
 
       def has_many_surveys
-        has_many :surveys, class_name: 'Survey::Survey'
+        has_many :surveys, class_name: 'AskIt::Survey'
       end
 
       def has_one_survey
-        has_one :survey, class_name: 'Survey::Survey'
+        has_one :survey, class_name: 'AskIt::Survey'
       end
     end
   end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Survey::Section < ActiveRecord::Base
+class AskIt::Section < ActiveRecord::Base
   self.table_name = 'survey_sections'
 
   # relations

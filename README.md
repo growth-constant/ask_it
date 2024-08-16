@@ -1,20 +1,20 @@
-# Questionnaire
+# Ask It
 
 [![Code Climate](https://codeclimate.com/github/dr-click/survey.png)](https://codeclimate.com/github/dr-click/questionnaire)
-### Questionnaire on Rails...
+### Ask It on Rails...
 
-Questionnaire is a Rails Engine that brings multi types of quizzes, surveys and contests into your Rails
-application. Questionnaire models were designed to be flexible enough in order to be extended and
-integrated with your own models. Questionnaire was initially extracted from a real application that handles contests and quizzes.
+Ask It is a Rails Engine that brings multi types of quizzes, surveys and contests into your Rails
+application. Ask It models were designed to be flexible enough in order to be extended and
+integrated with your own models. Ask It was initially extracted from a real application that handles contests and quizzes.
 
 ## Documentation
 
-You can view the Questionnaire documentation in RDoc format here:
+You can view the Ask It documentation in RDoc format here:
 
 http://rubydoc.info/github/dr-click/questionnaire/master/frames
 
 ## Main Features:
- - Questionnaire can limit the number of attempts for each participant, can have multiple sections
+ - Ask It can limit the number of attempts for each participant, can have multiple sections
  - Sections can have multiple questions
  - Questions can have multiple answers
  - Answers can have different weights and types (multi choices, single choice, number, text)
@@ -76,9 +76,9 @@ but if your surveys need to have a maximum number of attempts
 you can pass the attribute `attempts_number` when creating them.
 ```ruby
 # Each Participant can respond 4 times this survey
-Survey::Survey.new(:name => "Star Wars Quiz", :attempts_number => 4)
+AskIt::Survey.new(:name => "Star Wars Quiz", :attempts_number => 4)
 ```
-## Questionnaire used in your controllers
+## Ask It used in your controllers
 In this example we are using the current_user helper
 but you can do it in the way you want.
 
@@ -89,7 +89,7 @@ class ContestsController < ApplicationController
 
   # create a new attempt to this survey
   def new
-    @survey =  Survey::Survey.active.last
+    @survey =  AskIt::Survey.active.last
     @attempt = @survey.attempts.new
     @attempt.answers.build
     @participant = current_user # you have to decide what to do here
@@ -98,7 +98,7 @@ class ContestsController < ApplicationController
   # create a new attempt in this survey
   # an attempt needs to have a participant assigned
   def create
-    @survey = Survey::Survey.active.last
+    @survey = AskIt::Survey.active.last
     @attempt = @survey.attempts.new(attempt_params)
     @attempt.participant = current_user
     if @attempt.valid? and @attempt.save
@@ -191,19 +191,19 @@ that checks if the participant already spent his attempts.
             <% question.options.each do |option| %>
               
               
-              <% if option.options_type_id == Survey::OptionsType.multi_choices %>
+              <% if option.options_type_id == AskIt::OptionsType.multi_choices %>
                 <%= hidden_field_tag "survey_attempt[answers_attributes][#{seq}][question_id]", question.id %>
                 <%= check_box_tag "survey_attempt[answers_attributes][#{seq}][option_id]", option.id %>
                 <% seq += 1 %>
-              <% elsif option.options_type_id == Survey::OptionsType.single_choice %>
+              <% elsif option.options_type_id == AskIt::OptionsType.single_choice %>
                 <%= hidden_field_tag "survey_attempt[answers_attributes][#{seq}][question_id]", question.id %>
                 <%= radio_button_tag "survey_attempt[answers_attributes][#{seq}][option_id]", option.id %>
-              <% elsif option.options_type_id == Survey::OptionsType.number %>
+              <% elsif option.options_type_id == AskIt::OptionsType.number %>
                 <%= hidden_field_tag "survey_attempt[answers_attributes][#{seq}][question_id]", question.id %>
                 <%= hidden_field_tag "survey_attempt[answers_attributes][#{seq}][option_id]", option.id %>
                 <%= number_field_tag "survey_attempt[answers_attributes][#{seq}][option_number]", "", :style => "width: 40px;" %>
                 <% seq += 1 %>
-              <% elsif option.options_type_id == Survey::OptionsType.text %>
+              <% elsif option.options_type_id == AskIt::OptionsType.text %>
                 <%= hidden_field_tag "survey_attempt[answers_attributes][#{seq}][question_id]", question.id %>
                 <%= hidden_field_tag "survey_attempt[answers_attributes][#{seq}][option_id]", option.id %>
                 <%= text_field_tag "survey_attempt[answers_attributes][#{seq}][option_text]", "" %>
@@ -253,7 +253,7 @@ making your job easier.
 
 ```ruby
 # select the first active Survey
-survey = Survey::Survey.active.first
+survey = AskIt::Survey.active.first
 
 # select all the attempts from this survey
 survey_answers = survey.attempts

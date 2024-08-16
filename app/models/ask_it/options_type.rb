@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Survey::OptionsType
+class AskIt::OptionsType
   @@options_types = { multi_choices: 1,
                       single_choice: 2,
                       number: 3,
@@ -17,7 +17,7 @@ class Survey::OptionsType
 
   def self.options_types_title
     titled = {}
-    Survey::OptionsType.options_types.each { |k, v| titled[k.to_s.titleize] = v }
+    AskIt::OptionsType.options_types.each { |k, v| titled[k.to_s.titleize] = v }
     titled
   end
 

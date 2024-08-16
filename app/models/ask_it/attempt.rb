@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Survey::Attempt < ActiveRecord::Base
+class AskIt::Attempt < ActiveRecord::Base
   self.table_name = 'survey_attempts'
 
   # relations
@@ -72,10 +72,10 @@ class Survey::Attempt < ActiveRecord::Base
   end
 
   def collect_scores
-    multi_select_questions = Survey::Question.joins(:section)
+    multi_select_questions = AskIt::Question.joins(:section)
                                              .where(survey_sections: { survey_id: survey.id },
                                                     survey_questions: {
-                                                      questions_type_id: Survey::QuestionsType.multi_select
+                                                      questions_type_id: AskIt::QuestionsType.multi_select
                                                     })
     if multi_select_questions.empty? # No multi-select questions
       raw_score = answers.map(&:value).reduce(:+)

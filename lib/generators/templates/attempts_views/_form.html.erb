@@ -14,36 +14,36 @@
             <p><%= question.description if question.description %></p>
             <% question.options.each do |option| %>
             
-              <% if [Survey::OptionsType.multi_choices, Survey::OptionsType.multi_choices_with_text, Survey::OptionsType.multi_choices_with_number].include? option.options_type_id %>
+              <% if [AskIt::OptionsType.multi_choices, AskIt::OptionsType.multi_choices_with_text, AskIt::OptionsType.multi_choices_with_number].include? option.options_type_id %>
                 <%= hidden_field_tag "survey_attempt[answers_attributes][#{seq}][question_id]", question.id %>
                 <%= check_box_tag "survey_attempt[answers_attributes][#{seq}][option_id]", option.id %>
                 
-                <% if option.options_type_id == Survey::OptionsType.multi_choices_with_text %>
+                <% if option.options_type_id == AskIt::OptionsType.multi_choices_with_text %>
                   <%= text_field_tag "survey_attempt[answers_attributes][#{seq}][option_text]", "" %>
-                <% elsif option.options_type_id == Survey::OptionsType.multi_choices_with_number %>
+                <% elsif option.options_type_id == AskIt::OptionsType.multi_choices_with_number %>
                   <%= number_field_tag "survey_attempt[answers_attributes][#{seq}][option_number]", "", class: "form-control" %>
                 <% end %>
                 <% seq += 1 %>
-              <% elsif [Survey::OptionsType.single_choice, Survey::OptionsType.single_choice_with_text].include? option.options_type_id %>
+              <% elsif [AskIt::OptionsType.single_choice, AskIt::OptionsType.single_choice_with_text].include? option.options_type_id %>
                 <%= hidden_field_tag "survey_attempt[answers_attributes][#{seq}][question_id]", question.id %>
                 <%= radio_button_tag "survey_attempt[answers_attributes][#{seq}][option_id]", option.id %>
                 
-                <% if option.options_type_id == Survey::OptionsType.single_choice_with_text %>
+                <% if option.options_type_id == AskIt::OptionsType.single_choice_with_text %>
                   <%= text_field_tag "survey_attempt[answers_attributes][#{seq}][option_text]", "" %>
-                <% elsif option.options_type_id == Survey::OptionsType.single_choice_with_number %>
+                <% elsif option.options_type_id == AskIt::OptionsType.single_choice_with_number %>
                   <%= number_field_tag "survey_attempt[answers_attributes][#{seq}][option_number]", "", class: "form-control" %>
                 <% end %>
-              <% elsif option.options_type_id == Survey::OptionsType.number %>
+              <% elsif option.options_type_id == AskIt::OptionsType.number %>
                 <%= hidden_field_tag "survey_attempt[answers_attributes][#{seq}][question_id]", question.id %>
                 <%= hidden_field_tag "survey_attempt[answers_attributes][#{seq}][option_id]", option.id %>
                 <%= number_field_tag "survey_attempt[answers_attributes][#{seq}][option_number]", "", :style => "width: 40px;" %>
                 <% seq += 1 %>
-              <% elsif option.options_type_id == Survey::OptionsType.text %>
+              <% elsif option.options_type_id == AskIt::OptionsType.text %>
                 <%= hidden_field_tag "survey_attempt[answers_attributes][#{seq}][question_id]", question.id %>
                 <%= hidden_field_tag "survey_attempt[answers_attributes][#{seq}][option_id]", option.id %>
                 <%= text_field_tag "survey_attempt[answers_attributes][#{seq}][option_text]", "" %>
                 <% seq += 1 %>
-              <% elsif option.options_type_id == Survey::OptionsType.large_text %>
+              <% elsif option.options_type_id == AskIt::OptionsType.large_text %>
                 <%= hidden_field_tag "survey_attempt[answers_attributes][#{seq}][question_id]", question.id %>
                 <%= hidden_field_tag "survey_attempt[answers_attributes][#{seq}][option_id]", option.id %>
                 <%= text_area_tag "survey_attempt[answers_attributes][#{seq}][option_text]", "" %>

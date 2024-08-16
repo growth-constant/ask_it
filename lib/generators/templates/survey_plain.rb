@@ -2,15 +2,15 @@ class <%= get_scope.capitalize %>::SurveysController < ApplicationController
   before_filter :load_survey, :only => [:show, :edit, :update]
 
   def index
-    @surveys = Survey::Survey.all
+    @surveys = AskIt::Survey.all
   end
 
   def new
-    @survey = Survey::Survey.new
+    @survey = AskIt::Survey.new
   end
 
   def create
-    @survey = Survey::Survey.new(survey_params)
+    @survey = AskIt::Survey.new(survey_params)
     if @survey.valid? and @survey.save
       default_redirect
     else
@@ -39,7 +39,7 @@ class <%= get_scope.capitalize %>::SurveysController < ApplicationController
   end
 
   def load_survey
-    @survey = Survey::Survey.find(params[:id])
+    @survey = AskIt::Survey.find(params[:id])
   end
   
   #######
@@ -52,7 +52,7 @@ class <%= get_scope.capitalize %>::SurveysController < ApplicationController
       params[:survey_survey]
     else
       protected_attrs =  ["created_at", "updated_at"]
-      params.require(:survey_survey).permit(Survey::Survey.new.attributes.keys - protected_attrs, :sections_attributes => [Survey::Section.new.attributes.keys - protected_attrs, :questions_attributes => [Survey::Question.new.attributes.keys - protected_attrs, :options_attributes => [Survey::Option.new.attributes.keys - protected_attrs]]])
+      params.require(:survey_survey).permit(AskIt::Survey.new.attributes.keys - protected_attrs, :sections_attributes => [AskIt::Section.new.attributes.keys - protected_attrs, :questions_attributes => [AskIt::Question.new.attributes.keys - protected_attrs, :options_attributes => [AskIt::Option.new.attributes.keys - protected_attrs]]])
     end
   end
 end

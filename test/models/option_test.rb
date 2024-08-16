@@ -9,38 +9,38 @@ class OptionTest < ActiveSupport::TestCase
   end
 
   test 'should create a valid option with multi choices type' do
-    option = create_option(options_type_id: Survey::OptionsType.multi_choices)
+    option = create_option(options_type_id: AskIt::OptionsType.multi_choices)
 
     should_be_persisted option
-    assert_equal option.options_type_id, Survey::OptionsType.multi_choices
+    assert_equal option.options_type_id, AskIt::OptionsType.multi_choices
   end
 
   test 'should create a valid option with single choice type' do
-    option = create_option(options_type_id: Survey::OptionsType.single_choice)
+    option = create_option(options_type_id: AskIt::OptionsType.single_choice)
 
     should_be_persisted option
-    assert_equal option.options_type_id, Survey::OptionsType.single_choice
+    assert_equal option.options_type_id, AskIt::OptionsType.single_choice
   end
 
   test 'should create a valid option with number type' do
-    option = create_option(options_type_id: Survey::OptionsType.number)
+    option = create_option(options_type_id: AskIt::OptionsType.number)
 
     should_be_persisted option
-    assert_equal option.options_type_id, Survey::OptionsType.number
+    assert_equal option.options_type_id, AskIt::OptionsType.number
   end
 
   test 'should create a valid option with text type' do
-    option = create_option(options_type_id: Survey::OptionsType.text)
+    option = create_option(options_type_id: AskIt::OptionsType.text)
 
     should_be_persisted option
-    assert_equal option.options_type_id, Survey::OptionsType.text
+    assert_equal option.options_type_id, AskIt::OptionsType.text
   end
 
   test 'should create a valid option with large_text type' do
-    option = create_option(options_type_id: Survey::OptionsType.large_text)
+    option = create_option(options_type_id: AskIt::OptionsType.large_text)
 
     should_be_persisted option
-    assert_equal option.options_type_id, Survey::OptionsType.large_text
+    assert_equal option.options_type_id, AskIt::OptionsType.large_text
   end
 
   test 'should create a valid option with accepted type' do
@@ -56,11 +56,11 @@ class OptionTest < ActiveSupport::TestCase
   end
 
   test 'should create a option with empty or nil text fields for text or number types' do
-    optionA = create_option(text: '', options_type_id: Survey::OptionsType.text)
-    optionB = create_option(text: nil, options_type_id: Survey::OptionsType.text)
+    optionA = create_option(text: '', options_type_id: AskIt::OptionsType.text)
+    optionB = create_option(text: nil, options_type_id: AskIt::OptionsType.text)
 
-    optionC = create_option(text: '', options_type_id: Survey::OptionsType.number)
-    optionD = create_option(text: nil, options_type_id: Survey::OptionsType.number)
+    optionC = create_option(text: '', options_type_id: AskIt::OptionsType.number)
+    optionD = create_option(text: nil, options_type_id: AskIt::OptionsType.number)
 
     should_be_persisted optionA
     should_be_persisted optionB
@@ -70,23 +70,23 @@ class OptionTest < ActiveSupport::TestCase
   end
 
   test 'should not create a option with empty or nil text fields for multi_choices or single_choice types' do
-    optionA = create_option(text: '', options_type_id: Survey::OptionsType.multi_choices)
-    optionB = create_option(text: nil, options_type_id: Survey::OptionsType.multi_choices)
+    optionA = create_option(text: '', options_type_id: AskIt::OptionsType.multi_choices)
+    optionB = create_option(text: nil, options_type_id: AskIt::OptionsType.multi_choices)
 
-    optionC = create_option(text: '', options_type_id: Survey::OptionsType.single_choice)
-    optionD = create_option(text: nil, options_type_id: Survey::OptionsType.single_choice)
+    optionC = create_option(text: '', options_type_id: AskIt::OptionsType.single_choice)
+    optionD = create_option(text: nil, options_type_id: AskIt::OptionsType.single_choice)
 
-    optionE = create_option(text: '', options_type_id: Survey::OptionsType.multi_choices_with_text)
-    optionF = create_option(text: nil, options_type_id: Survey::OptionsType.multi_choices_with_text)
+    optionE = create_option(text: '', options_type_id: AskIt::OptionsType.multi_choices_with_text)
+    optionF = create_option(text: nil, options_type_id: AskIt::OptionsType.multi_choices_with_text)
 
-    optionG = create_option(text: '', options_type_id: Survey::OptionsType.single_choice_with_text)
-    optionH = create_option(text: nil, options_type_id: Survey::OptionsType.single_choice_with_text)
+    optionG = create_option(text: '', options_type_id: AskIt::OptionsType.single_choice_with_text)
+    optionH = create_option(text: nil, options_type_id: AskIt::OptionsType.single_choice_with_text)
 
-    optionI = create_option(text: '', options_type_id: Survey::OptionsType.multi_choices_with_number)
-    optionJ = create_option(text: nil, options_type_id: Survey::OptionsType.multi_choices_with_number)
+    optionI = create_option(text: '', options_type_id: AskIt::OptionsType.multi_choices_with_number)
+    optionJ = create_option(text: nil, options_type_id: AskIt::OptionsType.multi_choices_with_number)
 
-    optionK = create_option(text: '', options_type_id: Survey::OptionsType.single_choice_with_number)
-    optionL = create_option(text: nil, options_type_id: Survey::OptionsType.single_choice_with_number)
+    optionK = create_option(text: '', options_type_id: AskIt::OptionsType.single_choice_with_number)
+    optionL = create_option(text: nil, options_type_id: AskIt::OptionsType.single_choice_with_number)
 
     should_not_be_persisted optionA
     should_not_be_persisted optionB

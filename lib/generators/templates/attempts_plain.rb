@@ -3,14 +3,14 @@ class <%= get_scope.capitalize %>::AttemptsController < ApplicationController
   helper "<%= get_scope%>/surveys"
 
   def new
-    @survey =  Survey::Survey.active.last
+    @survey =  AskIt::Survey.active.last
     @attempt = @survey.attempts.new
     @attempt.answers.build
     @participant = current_user # you have to decide what to do here
   end
 
   def create
-    @survey = Survey::Survey.active.last
+    @survey = AskIt::Survey.active.last
     @attempt = @survey.attempts.new(attempt_params)
     @attempt.participant = current_user  # you have to decide what to do here
     if @attempt.valid? and @attempt.save

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Survey::PredefinedValue < ActiveRecord::Base
+class AskIt::PredefinedValue < ActiveRecord::Base
   self.table_name = 'survey_predefined_values'
 
   # relations

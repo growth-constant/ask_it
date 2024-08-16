@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-Survey::Survey.include Survey::BelongsToLesson
+AskIt::Survey.include AskIt::BelongsToLesson

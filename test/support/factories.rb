@@ -2,54 +2,54 @@
 
 # Factories
 
-# Create a Survey::Survey
+# Create a AskIt::Survey
 def create_survey(opts = {})
-  Survey::Survey.create({
+  AskIt::Survey.create({
     name: ::Faker::Name.name,
     attempts_number: 3,
     description: ::Faker::Lorem.paragraph(1)
   }.merge(opts))
 end
 
-# Create a Survey::Section
+# Create a AskIt::Section
 def create_section(opts = {})
-  Survey::Section.create({
+  AskIt::Section.create({
     head_number: ::Faker::Name.name,
     name: ::Faker::Name.name,
     description: ::Faker::Lorem.paragraph(1)
   }.merge(opts))
 end
 
-# Create a Survey::Question
+# Create a AskIt::Question
 def create_question(opts = {})
-  Survey::Question.create({
+  AskIt::Question.create({
     text: ::Faker::Lorem.paragraph(1),
     options_attributes: { option: correct_option_attributes },
-    questions_type_id: Survey::QuestionsType.multiple_choice,
+    questions_type_id: AskIt::QuestionsType.multiple_choice,
     mandatory: false
   }.merge(opts))
 end
 
-# Create a Survey::PredefinedValue
+# Create a AskIt::PredefinedValue
 def create_predefined_value(opts = {})
-  Survey::PredefinedValue.create({
+  AskIt::PredefinedValue.create({
     name: ::Faker::Name.name
   }.merge(opts))
 end
 
-# Create a Survey::option but not saved
+# Create a AskIt::option but not saved
 def new_option(opts = {})
-  Survey::Option.new(option_attributes.merge(opts))
+  AskIt::Option.new(option_attributes.merge(opts))
 end
 
-# Create a Survey::Option
+# Create a AskIt::Option
 def create_option(opts = {})
-  Survey::Option.create(option_attributes.merge(opts))
+  AskIt::Option.create(option_attributes.merge(opts))
 end
 
 def option_attributes
   { text: ::Faker::Lorem.paragraph(1),
-    options_type_id: Survey::OptionsType.multi_choices }
+    options_type_id: AskIt::OptionsType.multi_choices }
 end
 
 def correct_option_attributes
@@ -57,7 +57,7 @@ def correct_option_attributes
 end
 
 def create_attempt(opts = {})
-  attempt = Survey::Attempt.create do |t|
+  attempt = AskIt::Attempt.create do |t|
     t.survey = opts.fetch(:survey, nil)
     t.participant = opts.fetch(:user, nil)
     opts.fetch(:options, []).each do |option|
@@ -104,12 +104,12 @@ def create_answer(opts = {})
   question = section.questions.first
   option   = section.questions.first.options.first
   attempt = create_attempt(user: create_user, survey: survey)
-  Survey::Answer.create({ option: option, attempt: attempt, question: question }.merge(opts))
+  AskIt::Answer.create({ option: option, attempt: attempt, question: question }.merge(opts))
 end
 
 def create_answer_with_option_type(options_type, mandatory = false)
   option = create_option(options_type_id: options_type)
-  question = create_question(questions_type_id: Survey::QuestionsType.multiple_choice, mandatory: mandatory)
+  question = create_question(questions_type_id: AskIt::QuestionsType.multiple_choice, mandatory: mandatory)
   section = create_section
   survey = create_survey
 

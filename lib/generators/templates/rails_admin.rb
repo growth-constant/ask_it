@@ -2,9 +2,9 @@
 
 RailsAdmin.config do |c|
   c.excluded_models = [
-    Survey::Answer,
-    Survey::Option,
-    Survey::Attempt,
-    Survey::Question
+    AskIt::Answer,
+    AskIt::Option,
+    AskIt::Attempt,
+    AskIt::Question
   ]
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Survey::Survey < ActiveRecord::Base
+class AskIt::Survey < ActiveRecord::Base
   self.table_name = 'survey_surveys'
 
   # relations
@@ -27,12 +27,12 @@ class Survey::Survey < ActiveRecord::Base
 
   # returns all the correct options for current surveys
   def correct_options
-    Survey::Question.where(section_id: section_ids).map(&:correct_options).flatten
+    AskIt::Question.where(section_id: section_ids).map(&:correct_options).flatten
   end
 
   # returns all the incorrect options for current surveys
   def incorrect_options
-    Survey::Question.where(section_id: sections.collect(&:id)).map(&:incorrect_options).flatten
+    AskIt::Question.where(section_id: sections.collect(&:id)).map(&:incorrect_options).flatten
   end
 
   def avaliable_for_participant?(participant)

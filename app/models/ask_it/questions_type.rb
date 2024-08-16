@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Survey::QuestionsType
+class AskIt::QuestionsType
   @@questions_types = { multiple_choice: 2, free_response: 9, multi_select: 1 }
 
   def self.questions_types
@@ -9,7 +9,7 @@ class Survey::QuestionsType
 
   def self.questions_types_title
     titled = {}
-    Survey::QuestionsType.questions_types.each { |k, v| titled[k.to_s.titleize] = v }
+    AskIt::QuestionsType.questions_types.each { |k, v| titled[k.to_s.titleize] = v }
     titled
   end
 

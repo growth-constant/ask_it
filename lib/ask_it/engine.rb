@@ -2,7 +2,7 @@
 
 require 'rails'
 
-module Survey
+module AskIt
   class Engine < Rails::Engine
   end
 end

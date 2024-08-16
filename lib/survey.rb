@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'survey/engine'
-require 'survey/version'
-require 'survey/active_record'
+require 'ask_it/engine'
+require 'ask_it/version'
+require 'ask_it/active_record'
 
 ActiveRecord::Base.send(:include, AskIt::ActiveRecord)

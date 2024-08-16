@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-module Survey
+module AskIt
   VERSION = '0.1'
 end

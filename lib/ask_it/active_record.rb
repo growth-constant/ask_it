@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Survey
+module AskIt
   module ActiveRecord
     extend ActiveSupport::Concern
 

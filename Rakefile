@@ -8,8 +8,13 @@ end
 
 require 'rake'
 require 'rdoc/task'
-
 require 'rake/testtask'
+
+begin
+  require 'gemika/tasks'
+rescue LoadError
+  puts 'Run `gem install gemika` for additional tasks'
+end
 
 Rake::TestTask.new(:test) do |t|
   t.libs << 'lib'

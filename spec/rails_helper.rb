@@ -9,6 +9,7 @@ require 'ask_it'
 require 'faker'
 require 'factory_bot'
 require 'rspec/rails'
+require 'support/models_create'
 
 #Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
 
@@ -24,6 +25,7 @@ RSpec.configure do |config|
   config.mock_with :mocha
   # setup factory bot
   config.include FactoryBot::Syntax::Methods
+  config.include Support::ModelsCreate
   config.before(:suite) do
     FactoryBot.find_definitions
   end

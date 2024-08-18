@@ -4,8 +4,8 @@ class AskIt::Survey < ActiveRecord::Base
   self.table_name = 'survey_surveys'
 
   # relations
-  has_many :attempts
-  has_many :sections
+  has_many :attempts, class_name: 'AskIt::Attempt'
+  has_many :sections, class_name: 'AskIt::Section'
 
   # rails 3 attr_accessible support
   if Rails::VERSION::MAJOR < 4

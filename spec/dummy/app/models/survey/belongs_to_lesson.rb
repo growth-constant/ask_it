@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module AskIt
+module Survey 
   module BelongsToLesson
     extend ActiveSupport::Concern
     included do

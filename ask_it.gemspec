@@ -20,8 +20,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency('mocha')
   s.add_development_dependency('faker')
   s.add_development_dependency('rake')
+  s.add_development_dependency "appraisal", "~> 2.5.0"
+  s.add_development_dependency('factory_bot')
   s.add_development_dependency('rubocop')
   s.add_development_dependency('rspec', '~> 3.1.0')
-  s.add_development_dependency('pry-rails')
-  s.add_development_dependency('pry-byebug')
 end

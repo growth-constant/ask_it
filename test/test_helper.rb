@@ -5,7 +5,6 @@ ENV['RAILS_ENV'] = 'test'
 
 require File.expand_path('../dummy/config/environment.rb', __FILE__)
 require 'rails/test'
-require 'mocha/setup'
 require 'faker'
 require 'pry'
 
@@ -18,3 +17,7 @@ ActiveRecord::MigrationContext.new(File.expand_path('../dummy/db/migrate/', __FI
 # Add support to load paths so we can overwrite broken webrat setup
 $LOAD_PATH.unshift File.expand_path('../support', __FILE__)
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
+
+RSpec.configure do |config|
+  config.mock_with :mocha
+end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Survey
+module AskIt 
   module Generators
     class InstallGenerator < Rails::Generators::Base
       source_root File.expand_path('../../templates', __FILE__)

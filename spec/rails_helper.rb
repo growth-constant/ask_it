@@ -3,14 +3,22 @@
 
 ENV['RAILS_ENV'] ||= 'test'
 
+require_relative './dummy_7/config/environment'
+
+require 'ask_it'
 require 'faker'
 require 'factory_bot'
-
-require File.expand_path('./dummy/config/environment', __dir__)
+require 'rspec/rails'
 
 #Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
 
-ActiveRecord::Migration.maintain_test_schema!
+# Ensure that migrations are run before the test suite is executed
+begin
+  ActiveRecord::Migration.maintain_test_schema!
+rescue ActiveRecord::PendingMigrationError => e
+  puts e.to_s.strip
+  exit 1
+end
 
 RSpec.configure do |config|
   config.mock_with :mocha

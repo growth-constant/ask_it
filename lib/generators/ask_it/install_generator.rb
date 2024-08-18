@@ -18,11 +18,22 @@ module AskIt
 
         migration_files.each do |migration_file|
           unless already_exists?(migration_file[:new_file_name])
-            copy_file "#{migration_file[:origin_file_name]}.rb", "db/migrate/#{timestamp_number}_#{migration_file[:new_file_name]}.rb"
+            template "#{migration_file[:origin_file_name]}.rb.tt", "db/migrate/#{timestamp_number}_#{migration_file[:new_file_name]}.rb"
             timestamp_number += 1
           end
         end
       end
+
+      def migration_version
+        if rails5_and_up?
+          "[#{Rails::VERSION::MAJOR}.#{Rails::VERSION::MINOR}]"
+        end
+      end
+
+      def rails5_and_up?
+        Rails::VERSION::MAJOR >= 5
+      end
+
 
       #######
 

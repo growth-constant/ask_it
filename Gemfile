@@ -6,4 +6,4 @@ gemspec
 
 gem "rdoc"
 
-gem "bootsnap", "~> 1.18"
+gem 'sqlite3', '~> 1.7.3'

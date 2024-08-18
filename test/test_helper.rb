@@ -3,10 +3,11 @@
 # Configure Rails Envinronment
 ENV['RAILS_ENV'] = 'test'
 
-require File.expand_path('../dummy/config/environment.rb', __FILE__)
 require 'rails/test'
 require 'faker'
 require 'pry'
+
+require File.expand_path('../dummy_7/config/environment.rb', __FILE__)
 
 Rails.backtrace_cleaner.remove_silencers!
 

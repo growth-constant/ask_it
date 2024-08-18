@@ -23,5 +23,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency "appraisal", "~> 2.5.0"
   s.add_development_dependency('factory_bot')
   s.add_development_dependency('rubocop')
-  s.add_development_dependency('rspec', '~> 3.1.0')
+  s.add_development_dependency('rspec', '~> 3.13')
+  s.add_development_dependency('rspec-rails', '>= 6.0')
 end

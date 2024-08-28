@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+# app/models/ask_it/question.rb
+puts "Loading AskIt::Question"
 
 class AskIt::Question < ActiveRecord::Base
   self.table_name = 'survey_questions'
@@ -24,7 +26,7 @@ class AskIt::Question < ActiveRecord::Base
   # validations
   validates :text, presence: true, allow_blank: false
   validates :questions_type_id, presence: true
-  validates :questions_type_id, inclusion: { in: AskIt::QuestionsType.questions_type_ids, unless: proc { |q| q.questions_type_id.blank? } }
+  validates :questions_type_id, inclusion: { in: AskIt::QuestionType.questions_type_ids, unless: proc { |q| q.questions_type_id.blank? } }
 
   scope :mandatory_only, -> { where(mandatory: true) }
 

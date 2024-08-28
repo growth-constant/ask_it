@@ -1,6 +1,8 @@
 # frozen_string_literal: true
+# app/models/ask_it/questions_type.rb
+puts "Loading AskIt::QuestionsType"
 
-class AskIt::QuestionsType
+class AskIt::QuestionType
   @@questions_types = { multiple_choice: 2, free_response: 9, multi_select: 1 }
 
   def self.questions_types
@@ -9,7 +11,7 @@ class AskIt::QuestionsType
 
   def self.questions_types_title
     titled = {}
-    AskIt::QuestionsType.questions_types.each { |k, v| titled[k.to_s.titleize] = v }
+    AskIt::QuestionType.questions_types.each { |k, v| titled[k.to_s.titleize] = v }
     titled
   end
 

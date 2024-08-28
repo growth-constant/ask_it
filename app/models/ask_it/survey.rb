@@ -6,6 +6,7 @@ class AskIt::Survey < ActiveRecord::Base
   # relations
   has_many :attempts, class_name: 'AskIt::Attempt'
   has_many :sections, class_name: 'AskIt::Section'
+  has_many :questions, through: :sections, class_name: 'AskIt::Question'
 
   # rails 3 attr_accessible support
   if Rails::VERSION::MAJOR < 4

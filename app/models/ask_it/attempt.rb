@@ -75,7 +75,7 @@ class AskIt::Attempt < ActiveRecord::Base
     multi_select_questions = AskIt::Question.joins(:section)
                                              .where(survey_sections: { survey_id: survey.id },
                                                     survey_questions: {
-                                                      questions_type_id: AskIt::QuestionsType.multi_select
+                                                      questions_type_id: AskIt::QuestionType.multi_select
                                                     })
     if multi_select_questions.empty? # No multi-select questions
       raw_score = answers.map(&:value).reduce(:+)

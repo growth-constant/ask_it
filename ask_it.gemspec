@@ -14,12 +14,13 @@ Gem::Specification.new do |s|
   s.email       = 'victor@joinbuildit.com'
   s.homepage    = 'https://github.com/'
   s.licenses    = 'LICENSE.md'
-  s.require_paths = %w[lib]
+  s.require_paths = %w[lib app]
 
   s.add_dependency('rails', '>= 5.1')
   s.add_development_dependency('mocha')
   s.add_development_dependency('faker')
   s.add_development_dependency('rake')
+  s.add_development_dependency('pry')
   s.add_development_dependency "appraisal", "~> 2.5.0"
   s.add_development_dependency('factory_bot')
   s.add_development_dependency('rubocop')

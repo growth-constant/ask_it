@@ -18,7 +18,7 @@ appraise 'rails_6.0.0' do
 
   platforms :ruby, :mswin, :mingw do
     gem 'pg', '~> 1.3.4'
-    gem 'sqlite3', '~> 1.7.3'
+    #gem 'sqlite3', '~> 1.7.3'
   end
 end
 
@@ -27,7 +27,7 @@ appraise 'rails_6.1.0' do
 
   platforms :ruby, :mswin, :mingw do
     gem 'pg', '~> 1.3.4'
-    gem 'sqlite3', '~> 1.7.3'
+    #gem 'sqlite3', '~> 1.7.3'
   end
 end
 
@@ -36,15 +36,16 @@ appraise 'rails_7.0.0' do
 
   platforms :ruby, :mswin, :mingw do
     gem 'pg', '~> 1.3.4'
-    gem 'sqlite3', '~> 1.7.3'
+    #gem 'sqlite3', '~> 1.7.3'
   end
 end
 
 appraise 'rails_7.1.0' do
+  gem 'bootsnap'
   gem 'rails', '~> 7.1.0'
 
   platforms :ruby, :mswin, :mingw do
     gem 'pg', '~> 1.5.6'
-    gem 'sqlite3', '~> 1.7.3'
+    #gem 'sqlite3', '~> 1.7.3'
   end
 end

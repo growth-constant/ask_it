@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_18_185937) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_29_125840) do
+  create_table "lessons", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "survey_answers", force: :cascade do |t|
     t.integer "attempt_id"
     t.integer "question_id"
@@ -91,6 +97,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_18_185937) do
     t.datetime "updated_at", null: false
     t.string "locale_name"
     t.text "locale_description"
+    t.integer "lesson_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -99,4 +106,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_18_185937) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "survey_surveys", "lessons"
 end

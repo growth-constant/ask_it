@@ -40,7 +40,7 @@ FactoryBot.define do
     name { Faker::Name.name }
   end
 
-  factory :lesson do
+  factory :lesson, class: 'Lesson' do
     name { Faker::Company.catch_phrase }
   end # Helper methods
 

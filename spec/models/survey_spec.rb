@@ -9,7 +9,7 @@ RSpec.describe AskIt::Survey, type: :model do
 
   it 'should not create a survey with active flag true and empty questions collection' do
     survey_a = build(:survey, active: true)
-    survey_b = create_survey_with_sections(2)
+    survey_b = create(:survey, :with_sections, sections_count: 1, questions_per_section: 2)
     survey_b.active = true
     survey_b.save
 
@@ -19,15 +19,14 @@ RSpec.describe AskIt::Survey, type: :model do
   end
 
   it 'should create a survey with 3 sections' do
-    num_questions = 3
-    survey = create_survey_with_sections(num_questions, num_questions)
+    survey = create(:survey, :with_sections, sections_count: 3, questions_per_section: 3)
     expect(survey).to be_persisted
-    expect(survey.sections.size).to eq(num_questions)
+    expect(survey.sections.size).to eq(3)
   end
 
   it 'should create a survey with 2 questions' do
     num_questions = 2
-    survey = create_survey_with_sections(num_questions, 1)
+    survey = create(:survey, :with_sections, sections_count: 1, questions_per_section: 2)
     expect(survey).to be_persisted
     expect(survey.sections.first.questions.size).to eq(num_questions)
   end
@@ -47,7 +46,7 @@ RSpec.describe AskIt::Survey, type: :model do
 
   it 'should have the correct associations via "has_many_surveys"' do
     lesson = create(:lesson)
-    survey = create_survey_with_sections(2, 1)
+    survey = create(:survey, :with_sections, sections_count: 1, questions_per_section: 2)
     survey.lesson_id = lesson.id
     survey.save
 
@@ -57,10 +56,10 @@ RSpec.describe AskIt::Survey, type: :model do
   it 'should pass if all the users have the same score' do
     user_a = create(:user)
     user_b = create(:user)
-    survey = create_survey_with_sections(2)
+    survey = create(:survey, :with_sections, sections_count: 1, questions_per_section: 2)
 
-    create_attempt_for(user_a, survey, all: :right)
-    create_attempt_for(user_b, survey, all: :right)
+    create(:attempt, participant: user_a, survey: survey, all_correct: true)
+    create(:attempt, participant: user_b, survey: survey, all_correct: true)
 
     expect(participant_score(user_a, survey)).to eq(participant_score(user_b, survey))
   end

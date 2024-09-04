@@ -3,6 +3,9 @@
 
 ENV['RAILS_ENV'] ||= 'test'
 
+require 'simplecov'
+SimpleCov.start 'rails'
+
 def transform_gemfile_path(path)
   # check if path does not have a rails_7.1.0 pattern
   # and throw an error if it does not

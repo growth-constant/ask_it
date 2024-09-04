@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 env:
-  # CC_TEST_REPORTER_ID: "ac477089fe20ab4fc7e0d304cab75f72d73d58a7596d366935d18fcc7d51f8f9"
+  CC_TEST_REPORTER_ID: "b2ad2de1f7a40733a6cd96f85d51f6047185948535f6b5d0a9c0f3389bfb1f3e"
 
   # `github.ref` points to the *merge commit* when running tests on a pull request, which will be a commit
   # that doesn't exists in our code base. Since this workflow triggers from a PR, we use the HEAD SHA instead.
@@ -52,7 +52,7 @@ jobs:
       run: ./cc-test-reporter before-build
     # run tests
     - name: Run tests
-      run: bundle exec appraisal rspec
+      run: COVERAGE=1 bundle exec appraisal rspec
     # upload code coverage to Code Climate
     - name: Upload code coverage to Code Climate
       run: |

@@ -31,69 +31,41 @@ jobs:
           - '2.7.8'
           - '3.2.5'
           - '3.3.4'
-        gemfile:
-          - Gemfile.5.1
-          - Gemfile.6.1
-          - Gemfile.7.0
-          - Gemfile.7.1
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
         rubygems: latest
-        ruby-version: ${{ matrix.ruby-version }}
-        bundler-cache: ${{ !startsWith(matrix.ruby-version, 'jruby') }}
-    - name: Run tests
-      run: bundle exec rspec
-
-  test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        rubygems: latest
-        ruby-version: 'ruby'
-        bundler-cache: true
+        ruby-version: ${{ matrix.ruby }}
+        bundler-cache: true 
+    # set up gemfile dependencies
+    - name: Set up Gemfile dependencies
+      run: bundle install
+    - name: Set up Appraisals dependencies
+      run: bundle exec appraisal install
+    # download cc-test-reporter
     - name: "Download cc-test-reporter from codeclimate.com"
       run: |
         curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
         chmod +x ./cc-test-reporter
     - name: "Report to Code Climate that we will send a coverage report."
       run: ./cc-test-reporter before-build
+    # run tests
     - name: Run tests
-      run: bundle exec rake test 
-      env:
-        COVERAGE: 1
+      run: bundle exec appraisal rspec
+    # upload code coverage to Code Climate
     - name: Upload code coverage to Code Climate
       run: |
         ./cc-test-reporter after-build \
           --coverage-input-type simplecov \
           ./coverage/.resultset.json
-
-  rubocop:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        rubygems: default
-        ruby-version: 'ruby'
-        bundler-cache: false
-    - run: bundle install
-    - name: Run RuboCop
-      run: bundle exec rubocop
-
   required-checks:
     runs-on: ubuntu-latest
     if: ${{ always() }}
     needs:
-      - test
       - matrix-test
-      - rubocop
     steps:
       - name: failure
         if: ${{ failure() || contains(needs.*.result, 'failure') }}

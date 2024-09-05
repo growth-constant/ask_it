@@ -22,14 +22,16 @@
 #   end
 # end
 
-#appraise 'rails_6.1.0' do
-#  gem 'rails', '~> 6.1.0'
-#
-#  platforms :ruby, :mswin, :mingw do
-#    gem 'pg', '~> 1.3.4'
-#    #gem 'sqlite3', '~> 1.7.3'
-#  end
-#end
+appraise 'rails_6.1.0' do
+  gem 'rails', '~> 6.1.0'
+  gem 'bootsnap'
+  remove_gem 'net-protocol'
+
+  platforms :ruby, :mswin, :mingw do
+    gem 'pg', '~> 1.3.4'
+    #gem 'sqlite3', '~> 1.7.3'
+  end
+end
 
 appraise 'rails_7.0.0' do
   gem 'bootsnap'

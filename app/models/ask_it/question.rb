@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 # app/models/ask_it/question.rb
-puts "Loading AskIt::Question"
 
 class AskIt::Question < ActiveRecord::Base
   self.table_name = 'survey_questions'

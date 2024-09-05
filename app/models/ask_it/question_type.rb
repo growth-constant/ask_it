@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 # app/models/ask_it/questions_type.rb
-puts "Loading AskIt::QuestionsType"
 
 class AskIt::QuestionType
   @@questions_types = { multiple_choice: 2, free_response: 9, multi_select: 1 }

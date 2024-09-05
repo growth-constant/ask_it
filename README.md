@@ -39,40 +39,25 @@ http://rubydoc.info/github/dr-click/questionnaire/master/frames
 
 ## Installation
 
-Add survey to your Gemfile:
-```ruby
-gem 'questionnaire_engine', '0.1', :require=>"survey"
+Add Ask It to your Gemfile for Rails 6 and 7:
 
+```ruby
+gem 'ask_it'
 ```
 or
 ```ruby
-gem 'questionnaire_engine', github: 'dr-click/questionnaire', branch: 'master', :require=>"survey"
+gem 'ask_it'
 
 ```
-or use this for Rails 5
-```ruby
-gem 'questionnaire_engine', github: 'clearfunction/questionnaire', branch: 'master', :require=>"survey"
 
-```
-Then run bundle to install the Gem:
-```sh
-bundle install
-```
 Now generate and run migrations:
 ```sh
-rails generate survey:install
+rails generate ask_it:install
 
 bundle exec rake db:migrate
 ```
 
-## Important notice for Rails 5.1
-Add Rails version to all generated migrations. Example
-
-```ruby
-class CreateSurvey < ActiveRecord::Migration # change to: class CreateSurvey < ActiveRecord::Migration[5.1]
-```
-
-## Getting started with Survey
+## Getting started with Ask It
 
 ## Survey inside your models
 To make a model aware of you just need to add `has_surveys` on it:
@@ -88,11 +73,13 @@ Every participant can respond to surveys and every response is registered as a a
 By default, survey logic assumes an infinite number of attempts per participant
 but if your surveys need to have a maximum number of attempts
 you can pass the attribute `attempts_number` when creating them.
+
 ```ruby
 # Each Participant can respond 4 times this survey
 AskIt::Survey.new(:name => "Star Wars Quiz", :attempts_number => 4)
 ```
 ## Ask It used in your controllers
+
 In this example we are using the current_user helper
 but you can do it in the way you want.
 
@@ -279,6 +266,7 @@ user_highest_score  = survey_answers.for_participant(@user).high_score
 global_highest_score = survey_answers.high_score
 ```
 # Compability 
+
 ### Rails
 Survey supports Rails 3 and 4. For use in Rails 4 without using protected_attributes gem.
 Rails 4 support is recent, so some minor issues may still be present, please report them.
@@ -289,5 +277,11 @@ Only support versions of Active Admin higher than 0.3.1.
 # License
 - Modified by [Dr-Click](http://github.com/dr-click)
 - Copyright © 2013 [Runtime Revolution](http://www.runtime-revolution.com), released under the MIT license.
-- This repository was forked from the original one : https://github.com/runtimerevolution/survey
+- This repository was forked from the original one : https://github.com/clearfunction/questionnaire
 
+# Thanks to Gems
+- [Appraisal](https://github.com/thoughtbot/appraisal)
+- [Code Climate](https://codeclimate.com/)
+- [Simplecov](https://github.com/colszowka/simplecov)
+- [Rspec](https://github.com/rspec/rspec)
+- [Rails](https://github.com/rails/rails)

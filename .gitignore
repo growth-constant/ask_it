@@ -14,3 +14,4 @@ spec/dummy_710/storage/test.sqlite3*
 spec/dummy_710/log/test.log
 .ruby-version
 coverage/
+spec/dummy_610/db/test.sqlite3

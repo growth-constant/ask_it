@@ -32,6 +32,10 @@ jobs:
           - '3.2.5'
           - '3.3.4'
     steps:
+    # when ruby version is 2.7.8, we copy Gemfile-ruby-2.lock to Gemfile.lock
+    - name: Copy Gemfile.lock
+      if: ${{ matrix.ruby == '2.7.8' }}
+      run: cp Gemfile-ruby-2.lock Gemfile.lock
     - name: Checkout code
       uses: actions/checkout@v4
     - name: Set up Ruby

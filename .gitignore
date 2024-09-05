@@ -6,7 +6,11 @@ test/dummy/db/*.sqlite3
 test/dummy/log/*.log
 test/dummy/tmp/
 gemfiles/
-spec/dummy_7/storage/test.sqlite3
-spec/dummy_7/storage/test.sqlite3*
-spec/dummy_7/log/test.log
+spec/dummy_700/storage/test.sqlite3
+spec/dummy_700/storage/test.sqlite3*
+spec/dummy_700/log/test.log
+spec/dummy_710/storage/test.sqlite3
+spec/dummy_710/storage/test.sqlite3*
+spec/dummy_710/log/test.log
 .ruby-version
+coverage/

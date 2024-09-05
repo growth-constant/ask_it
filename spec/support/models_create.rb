@@ -19,7 +19,7 @@ module Support
 
     def create_attempt_for(user, survey, **opts)
       correct_options = opts.fetch(:all, :wrong) == :right ? survey.correct_options : survey.correct_options[1..-1]
-      create(:attempt, participant: user, survey:, answers_array: correct_options.map { |option| build(:answer, option: option) })
+      create(:attempt, participant: user, survey: survey, answers_array: correct_options.map { |option| build(:answer, option: option) })
     end
 
     def create_answer(opts = {})

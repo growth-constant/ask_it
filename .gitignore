@@ -9,3 +9,4 @@ gemfiles/
 spec/dummy_7/storage/test.sqlite3
 spec/dummy_7/storage/test.sqlite3*
 spec/dummy_7/log/test.log
+.ruby-version

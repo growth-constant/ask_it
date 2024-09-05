@@ -1,10 +1,25 @@
 # Ask It
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/74596429080573c6b707/maintainability)](https://codeclimate.com/github/growth-constant/ask_it/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/74596429080573c6b707/test_coverage)](https://codeclimate.com/github/growth-constant/ask_it/test_coverage)
 
 Ask It is a Rails Engine that brings multi types of quizzes, surveys and contests into your Rails
 application. Ask It models were designed to be flexible enough in order to be extended and
 integrated with your own models. Ask It was initially extracted from a real application that handles contests and quizzes.
+
+## Table of Contents
+
+- [Documentation](#documentation)
+- [Main Features](#main-features)
+- [Installation](#installation)
+- [Getting Started](#getting-started)
+- [Adding Survey Participants](#adding-survey-participants)
+- [Survey Associations](#survey-associations)
+- [Survey in Views](#survey-in-views)
+- [Scaffolds and CRUD Frameworks](#scaffolds-and-crud-frameworks)
+- [How to Use It](#how-to-use-it)
+- [Compatibility](#compatibility)
+- [License](#license)
 
 ## Documentation
 
@@ -275,5 +290,4 @@ Only support versions of Active Admin higher than 0.3.1.
 - Modified by [Dr-Click](http://github.com/dr-click)
 - Copyright © 2013 [Runtime Revolution](http://www.runtime-revolution.com), released under the MIT license.
 - This repository was forked from the original one : https://github.com/runtimerevolution/survey
- 
 

@@ -15,6 +15,8 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/'
   s.licenses    = 'LICENSE.md'
   s.require_paths = %w[lib app]
+  # add ruby version to the gemspec
+  s.required_ruby_version = '>= 2.7.8'
 
   s.add_dependency('rails', '>= 6.1')
   s.add_development_dependency('mocha')

@@ -57,6 +57,14 @@ jobs:
     # run tests
     - name: Run tests
       run: COVERAGE=1 bundle exec appraisal rspec
+    # upload coverage to github to upload artifact with ruby version
+    - name: Upload coverage to GitHub
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-${{ matrix.ruby }}
+        path: coverage
+    - name: List artifacts
+      run: ls -la ./coverage/
     # upload code coverage to Code Climate
     - name: Upload code coverage to Code Climate
       run: |

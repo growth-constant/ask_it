@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.licenses    = 'LICENSE.md'
   s.require_paths = %w[lib app]
 
-  s.add_dependency('rails', '>= 5.1')
+  s.add_dependency('rails', '>= 6.1')
   s.add_development_dependency('mocha')
   s.add_development_dependency('faker')
   s.add_development_dependency('rake')

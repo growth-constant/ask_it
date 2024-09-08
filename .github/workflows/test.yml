@@ -56,9 +56,9 @@ jobs:
           gemfiles/*.gemfile
           gemfiles/*.gemfile.lock
           vendor/bundle
-        key: ${{ runner.os }}-appraisal-${{ matrix.ruby }}-${{ hashFiles('Appraisals', 'Gemfile', 'Gemfile.lock') }}
+        key: ask-it-${{ runner.os }}-appraisal-${{ matrix.ruby }}-${{ hashFiles('Appraisals', 'Gemfile', 'Gemfile.lock') }}
         restore-keys: |
-          ${{ runner.os }}-appraisal-${{ matrix.ruby }}-
+          ask-it-${{ runner.os }}-appraisal-${{ matrix.ruby }}-
     # set up gemfile dependencies
     - name: Set up Appraisals dependencies
       run: bundle exec appraisal install
@@ -71,7 +71,7 @@ jobs:
           gemfiles/.bundle
           gemfiles/*.gemfile
           gemfiles/*.gemfile.lock
-        key: ${{ runner.os }}-appraisal-${{ matrix.ruby }}-${{ hashFiles('Appraisals', 'Gemfile', 'Gemfile.lock') }}
+        key: ask-it-${{ runner.os }}-appraisal-${{ matrix.ruby }}-${{ hashFiles('Appraisals', 'Gemfile', 'Gemfile.lock') }}
     # download cc-test-reporter an
     - name: Download cc-test-reporter
       uses: ./.github/actions/download-test-reporter
@@ -97,9 +97,9 @@ jobs:
     - name: Download all coverage artifacts
       uses: actions/download-artifact@v4
       with:
-        path: coverage*
+        path: coverage
     - name: List downloaded artifacts
-      run: ls -laR coverage*
+      run: ls -laR coverage/
     - name: Download cc-test-reporter
       uses: ./.github/actions/download-test-reporter
     - name: Format coverage
@@ -107,7 +107,7 @@ jobs:
         find coverage -name ".resultset.json" -exec ./cc-test-reporter format-coverage {} --input-type simplecov --output coverage/codeclimate.json \;
     # list the coverage files
     - name: List coverage files
-      run: ls -laR coverage
+      run: ls -laR coverage/
     - name: Sum coverage
       run: |
         ./cc-test-reporter sum-coverage coverage/codeclimate.json --parts 3 --output coverage/summed-coverage.json

@@ -47,6 +47,8 @@ jobs:
     # lint
     - name: Run rubocop
       run: bundle exec rubocop
+    # check if there is a cache for the gemfiles/gem of the appraisals and ruby version
+    - name: Check for cached gemfiles
     # set up gemfile dependencies
     - name: Set up Appraisals dependencies
       run: bundle exec appraisal install
@@ -77,7 +79,7 @@ jobs:
       with:
         path: coverage*
     - name: List downloaded artifacts
-      run: ls -aR coverage
+      run: ls -laR coverage*
     - name: Download cc-test-reporter
       uses: ./.github/actions/download-test-reporter
     - name: Sum coverage

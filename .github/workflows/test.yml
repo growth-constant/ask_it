@@ -63,7 +63,9 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: coverage-${{ matrix.ruby }}
-        path: coverage/.resultset.json
+        path: ./coverage/.resultset.json
+        if-no-files-found: error
+        include-hidden-files: true
 
   sum-coverage:
     needs: matrix-test

@@ -1,5 +1,4 @@
-class <%= get_scope.capitalize %>::SurveysController < AskIt::SurveysController 
-
+class <%= get_controller_scope %>SurveysController < AskIt::SurveysController 
   # GET /resource/surveys
   # def index
   #   super

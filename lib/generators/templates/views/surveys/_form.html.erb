@@ -1,14 +1,6 @@
 <%= form_for(@survey, :url => survey_scope(@survey)) do |f| %>
 
-  <% if f.object.errors.messages.any? %>
-    <ul>
-      <% f.object.errors.messages.each_pair do |field, msg| %>
-        <li>
-          <%= "#{field} - #{msg}" %>
-        </li>
-      <% end -%>
-    </ul>
-  <% end -%>
+  <%= f.error_messages %>
 
   <div class="field">
     <%= f.label :name %> <br />
@@ -57,16 +49,30 @@
 <script type="text/javascript">
   // remove attachment field
   function removeField(link) {
-    $(link).prev("input[type=hidden]").val("true");
-    tag = $(link).closest("li")
-    tag.hide("fade in").addClass("deleted");
+    var hiddenField = link.previousElementSibling;
+    if (hiddenField && hiddenField.type === "hidden") {
+      hiddenField.value = "true";
+    }
+    var tag = link.closest("li");
+    if (tag) {
+      tag.style.display = "none";
+      tag.classList.add("deleted");
+    }
   }
 
   // add attachment field
   function addField(link, association, content) {
     var new_id = new Date().getTime();
     var regexp = new RegExp("new_" + association, "g");
-    var html = $(content.replace(regexp, new_id)).hide();
-    html.appendTo($(link).closest("div.field").find("ul").first()).slideDown("slow");
+    var html = content.replace(regexp, new_id);
+    var tempDiv = document.createElement("div");
+    tempDiv.innerHTML = html;
+    var newElement = tempDiv.firstElementChild;
+    newElement.style.display = "none";
+    var ul = link.closest("div.field").querySelector("ul");
+    if (ul) {
+      ul.appendChild(newElement);
+      newElement.style.display = "block";
+    }
   }
 </script>

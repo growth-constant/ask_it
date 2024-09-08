@@ -6,10 +6,10 @@ module AskIt
 
     TEMPLATES = %w[active_admin rails_admin plain routes].freeze
 
-    argument  :arguments,
-              type: :array,
-              default: [],
-              banner: "< #{TEMPLATES.join('|')} > [options]"
+    argument :arguments,
+             type: :array,
+             default: [],
+             banner: "< #{TEMPLATES.join('|')} > [scope]"
 
     def create_resolution
       strategy = arguments.first
@@ -33,11 +33,8 @@ module AskIt
 
     def generate_plain_resolution
       scope = get_scope
-      template 'survey_plain.rb', "app/controllers/#{scope}/surveys_controller.rb"
-      template 'attempts_plain.rb', "app/controllers/#{scope}/attempts_controller.rb"
-      template 'helper.rb', "app/helpers/#{scope}/surveys_helper.rb"
-      directory 'survey_views', "app/views/#{scope}/surveys", recursive: true
-      directory 'attempts_views', "app/views/#{scope}/attempts", recursive: true
+      generate_controller(scope)
+      generate_views(scope)
       generate_routes_for(scope)
     end
 
@@ -45,33 +42,66 @@ module AskIt
       generate_routes_for(get_scope)
     end
 
+    def generate_controller(scope)
+      template 'controllers/surveys_controller.rb', controller_path(scope)
+      template 'controllers/attempts_controller.rb', attempts_controller_path(scope)
+    end
+
+    def generate_views(scope)
+      view_path = scope.present? ? "app/views/#{scope}" : 'app/views'
+      directory 'views/surveys', "#{view_path}/surveys", recursive: true
+      directory 'views/attempts', "#{view_path}/attempts", recursive: true
+    end
+
+    def generate_routes_for(scope)
+      inject_into_file 'config/routes.rb',
+                       after: 'Rails.application.routes.draw do' do
+        if scope.blank?
+          <<-CONTENT
+
+  resources :surveys
+  resources :attempts, only: %i[new create]
+          CONTENT
+        else
+          <<-CONTENT
+
+  namespace :#{scope} do
+    resources :surveys
+    resources :attempts, only: %i[new create]
+  end
+          CONTENT
+        end
+      end
+    end
+
+    def get_scope
+      arguments.size > 1 ? arguments[1] : nil
+    end
+
+    def get_controller_scope
+      scope = get_scope
+      scope.present? ? "#{scope.capitalize}::" : ''
+    end
+
+    def controller_path(scope)
+      scope.present? ? "app/controllers/#{scope}/surveys_controller.rb" : 'app/controllers/surveys_controller.rb'
+    end
+
+    def attempts_controller_path(scope)
+      scope.present? ? "app/controllers/#{scope}/attempts_controller.rb" : 'app/controllers/attempts_controller.rb'
+    end
+
     # Error Handlers
     def error_message(argument)
       error_message = <<-CONTENT
         This Resolution: '#{argument}' is not supported by Survey:
-        We only support Active Admin, Refinery and Active Scaffold
+        We only support Active Admin, Rails Admin, Plain, and Routes
       CONTENT
       say error_message, :red
     end
 
     def success_message(argument)
       say "Generation of #{argument.capitalize} Template Complete :) enjoy Survey", :green
-    end
-
-    def generate_routes_for(namespace, _conditional = nil)
-      content = <<-CONTENT
-
-  namespace :#{namespace} do
-    resources :surveys
-    resources :attempts, :only => [:new, :create]
-  end
-      CONTENT
-      inject_into_file 'config/routes.rb', "\n#{content}",
-                       after: "#{Rails.application.class}.routes.draw do"
-    end
-
-    def get_scope
-      arguments.size == 1 ? 'admin' : arguments[1].split(':').last
     end
   end
 end

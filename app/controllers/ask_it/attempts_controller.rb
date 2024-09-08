@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AskIt
   # Handles creation and management of survey attempts
   class AttemptsController < ApplicationController

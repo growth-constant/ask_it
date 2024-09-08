@@ -1,0 +1,10 @@
+<h3><%= flash[:alert]%></h3>
+<h3><%= flash[:error]%></h3>
+
+<% if @survey.avaliable_for_participant?(@participant) %>
+  <%= render 'form' %>
+<% else %>
+  <p>
+    <%= @participant.name %> spent all the possible attempts to answer this Survey
+  </p>
+<% end -%>

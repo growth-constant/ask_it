@@ -17,7 +17,7 @@ env:
   # that doesn't exists in our code base. Since this workflow triggers from a PR, we use the HEAD SHA instead.
   #
   # NOTE: These are both used by Code Climate (cc-test-reporter).
-  GIT_COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
+  GIT_COMMIT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
   GIT_BRANCH: ${{ github.head_ref || github.ref_name }}
 
 jobs:

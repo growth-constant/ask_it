@@ -18,7 +18,7 @@ env:
   #
   # NOTE: These are both used by Code Climate (cc-test-reporter).
   GIT_COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
-  GIT_BRANCH: ${{ github.head_ref }}
+  GIT_BRANCH: ${{ github.head_ref || github.ref_name }}
 
 jobs:
   matrix-test:
@@ -48,7 +48,7 @@ jobs:
     - name: Run rubocop
       run: bundle exec rubocop
     # check if there is a cache for the gemfiles/gem of the appraisals and ruby version
-    - name: Cache Appraisal gems and gemfiles
+    - name: Restore cache for Appraisal gems and gemfiles
       id: cache-appraisal
       uses: actions/cache/restore@v4
       with:

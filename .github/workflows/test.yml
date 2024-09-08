@@ -53,9 +53,9 @@ jobs:
       uses: actions/cache/restore@v4
       with:
         path: |
+          vendor/bundle
           gemfiles/*.gemfile
           gemfiles/*.gemfile.lock
-          vendor/bundle
         key: ask-it-${{ runner.os }}-appraisal-${{ matrix.ruby }}-${{ hashFiles('Appraisals', 'Gemfile', 'Gemfile.lock') }}
         restore-keys: |
           ask-it-${{ runner.os }}-appraisal-${{ matrix.ruby }}-
@@ -68,7 +68,6 @@ jobs:
       with:
         path: |
           vendor/bundle
-          gemfiles/.bundle
           gemfiles/*.gemfile
           gemfiles/*.gemfile.lock
         key: ask-it-${{ runner.os }}-appraisal-${{ matrix.ruby }}-${{ hashFiles('Appraisals', 'Gemfile', 'Gemfile.lock') }}

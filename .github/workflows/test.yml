@@ -98,8 +98,6 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         path: coverage
-    - name: List downloaded artifacts
-      run: ls -laR coverage/
     - name: Download cc-test-reporter
       uses: ./.github/actions/download-test-reporter
     - name: Format coverage

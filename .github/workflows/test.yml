@@ -48,7 +48,17 @@ jobs:
     - name: Run rubocop
       run: bundle exec rubocop
     # check if there is a cache for the gemfiles/gem of the appraisals and ruby version
-    - name: Check for cached gemfiles
+    - name: Cache Appraisal gems and gemfiles
+      id: cache-appraisal
+      uses: actions/cache@v3
+      with:
+        path: |
+          gemfiles/*.gemfile
+          gemfiles/*.gemfile.lock
+          vendor/bundle
+        key: ${{ runner.os }}-appraisal-${{ matrix.ruby }}-${{ hashFiles('Appraisals', 'Gemfile', 'Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-appraisal-${{ matrix.ruby }}-
     # set up gemfile dependencies
     - name: Set up Appraisals dependencies
       run: bundle exec appraisal install

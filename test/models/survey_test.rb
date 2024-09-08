@@ -6,15 +6,15 @@ class SurveyTest < ActiveSupport::TestCase
     should_not_be_persisted survey
   end
 
-  test 'should not create a  survey with active flag true and empty questions collection' do
-    surveyA = create_survey(active: true)
-    surveyB = create_survey_with_sections(2)
-    surveyB.active = true
-    surveyB.save
+  test 'should not create a survey with active flag true and empty questions collection' do
+    survey_a = create_survey(active: true)
+    survey_b = create_survey_with_sections(2)
+    survey_b.active = true
+    survey_b.save
 
-    should_not_be_persisted surveyA
-    should_be_persisted surveyB
-    should_be_true surveyB.valid?
+    should_not_be_persisted survey_a
+    should_be_persisted survey_b
+    should_be_true survey_b.valid?
   end
 
   test 'should create a survey with 3 sections' do
@@ -37,8 +37,8 @@ class SurveyTest < ActiveSupport::TestCase
   end
 
   test 'should not save survey without all the needed fields' do
-    survey_without_name = create_survey(name: nil)
-    survey_without_description = create_survey(description: nil)
+    create_survey(name: nil)
+    create_survey(description: nil)
     %w[name description].each do |suffix|
       should_not_be_persisted eval("survey_without_#{suffix}")
     end

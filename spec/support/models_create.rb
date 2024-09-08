@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Support
   module ModelsCreate
     def create_survey_with_sections(num, sections_num = 1)
@@ -18,8 +20,10 @@ module Support
     end
 
     def create_attempt_for(user, survey, **opts)
-      correct_options = opts.fetch(:all, :wrong) == :right ? survey.correct_options : survey.correct_options[1..-1]
-      create(:attempt, participant: user, survey: survey, answers_array: correct_options.map { |option| build(:answer, option: option) })
+      correct_options = opts.fetch(:all, :wrong) == :right ? survey.correct_options : survey.correct_options[1..]
+      create(:attempt, participant: user, survey: survey, answers_array: correct_options.map do |option|
+                                                                           build(:answer, option: option)
+                                                                         end)
     end
 
     def create_answer(opts = {})
@@ -31,7 +35,7 @@ module Support
       AskIt::Answer.create({ option: option, attempt: attempt, question: question }.merge(opts))
     end
 
-    def create_lesson(survey)
+    def create_lesson(_survey)
       Lesson.create(name: Faker::Company.catch_phrase)
     end
   end

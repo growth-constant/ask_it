@@ -1,7 +1,7 @@
 # frozen_string_literal: true
+
 module Support
   module ScoresAndAttempts
-
     def number_of_current_attempts(participant, survey)
       participant.for_survey(survey).size if participant.respond_to?(:for_survey)
     end
@@ -17,6 +17,5 @@ module Support
     def participant_with_more_wrong_answers(survey)
       survey.attempts.scores.last.participant
     end
-
   end
 end

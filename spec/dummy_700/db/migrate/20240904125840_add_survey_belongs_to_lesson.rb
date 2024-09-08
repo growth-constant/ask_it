@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddSurveyBelongsToLesson < ActiveRecord::Migration[7.0]
   def change
     # create belongs to association for survey_surveys

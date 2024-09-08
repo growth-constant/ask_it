@@ -15,8 +15,6 @@ class SectionTest < ActiveSupport::TestCase
 
   test 'should not save section without all the needed fields' do
     section_without_name = create_section(name: nil)
-    %w[name].each do |suffix|
-      should_not_be_persisted eval("section_without_#{suffix}")
-    end
+    should_not_be_persisted section_without_name
   end
 end

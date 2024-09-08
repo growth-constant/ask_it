@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe AskIt::Option, type: :model do
@@ -56,12 +58,12 @@ RSpec.describe AskIt::Option, type: :model do
 
     context 'text field validations' do
       it 'should create an option with empty or nil text fields for text or number types' do
-        optionA = create(:option, text: '', options_type_id: AskIt::OptionsType.text)
-        optionB = create(:option, text: nil, options_type_id: AskIt::OptionsType.text)
-        optionC = create(:option, text: '', options_type_id: AskIt::OptionsType.number)
-        optionD = create(:option, text: nil, options_type_id: AskIt::OptionsType.number)
+        option_a = create(:option, text: '', options_type_id: AskIt::OptionsType.text)
+        option_b = create(:option, text: nil, options_type_id: AskIt::OptionsType.text)
+        option_c = create(:option, text: '', options_type_id: AskIt::OptionsType.number)
+        option_d = create(:option, text: nil, options_type_id: AskIt::OptionsType.number)
 
-        [optionA, optionB, optionC, optionD].each do |option|
+        [option_a, option_b, option_c, option_d].each do |option|
           expect(option).to be_persisted
         end
       end
@@ -77,11 +79,11 @@ RSpec.describe AskIt::Option, type: :model do
         ]
 
         invalid_types.each do |type|
-          optionA = build(:option, text: '', options_type_id: type)
-          optionB = build(:option, text: nil, options_type_id: type)
+          option_a = build(:option, text: '', options_type_id: type)
+          option_b = build(:option, text: nil, options_type_id: type)
 
-          expect(optionA).not_to be_valid
-          expect(optionB).not_to be_valid
+          expect(option_a).not_to be_valid
+          expect(option_b).not_to be_valid
         end
       end
     end
@@ -89,23 +91,23 @@ RSpec.describe AskIt::Option, type: :model do
 
   describe 'correct flag' do
     it 'should be true if option is set as correct and false if set as incorrect' do
-      optionA = create(:option, correct: false)
-      optionB = create(:option, correct: true)
+      option_a = create(:option, correct: false)
+      option_b = create(:option, correct: true)
 
-      expect(optionA).not_to be_correct
-      expect(optionB).to be_correct
+      expect(option_a).not_to be_correct
+      expect(option_b).to be_correct
     end
   end
 
   describe 'weight synchronization' do
     it 'should synchronize weights with the correct flag' do
-      optionA = create(:option, correct: false)
-      optionB = create(:option, correct: true)
-      optionC = create(:option, correct: true, weight: 5)
+      option_a = create(:option, correct: false)
+      option_b = create(:option, correct: true)
+      option_c = create(:option, correct: true, weight: 5)
 
-      expect(optionA.weight).to eq(0)
-      expect(optionB.weight).to eq(1)
-      expect(optionC.weight).to eq(5)
+      expect(option_a.weight).to eq(0)
+      expect(option_b.weight).to eq(1)
+      expect(option_c.weight).to eq(5)
     end
   end
 end

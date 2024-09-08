@@ -1,16 +1,17 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe AskIt::Attempt, type: :model do
-
   describe 'validations' do
     def number_of_attempts
       5
     end
 
-    it "passes if the user has 5 attempts completed" do
+    it 'passes if the user has 5 attempts completed' do
       user = create(:user)
       survey = create(:survey, :with_sections, attempts_number: number_of_attempts)
-      
+
       number_of_attempts.times do
         create(:attempt, participant: user, survey: survey)
       end
@@ -21,14 +22,14 @@ RSpec.describe AskIt::Attempt, type: :model do
     it 'raises error when the User tries to respond more times than acceptable' do
       user = create(:user)
       survey = create(:survey, :with_sections, attempts_number: number_of_attempts)
-      
+
       number_of_attempts.times do
         create(:attempt, participant: user, survey: survey)
       end
-      
-      expect {
+
+      expect do
         create(:attempt, participant: user, survey: survey)
-      }.to raise_error(ActiveRecord::RecordInvalid, /Questionnaire Number of attempts exceeded/)
+      end.to raise_error(ActiveRecord::RecordInvalid, /Questionnaire Number of attempts exceeded/)
 
       expect(number_of_current_attempts(user, survey)).not_to eq(number_of_attempts + 1)
       expect(number_of_current_attempts(user, survey)).to eq(number_of_attempts)

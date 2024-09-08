@@ -7,17 +7,17 @@ require 'rails/test'
 require 'faker'
 require 'pry'
 
-require File.expand_path('../dummy_7/config/environment.rb', __FILE__)
+require File.expand_path('dummy_7/config/environment.rb', __dir__)
 
 Rails.backtrace_cleaner.remove_silencers!
 
 # Run any available migration
-ActiveRecord::MigrationContext.new(File.expand_path('../dummy/db/migrate/', __FILE__))
+ActiveRecord::MigrationContext.new(File.expand_path('dummy/db/migrate', __dir__))
 
 # Load support files
 # Add support to load paths so we can overwrite broken webrat setup
-$LOAD_PATH.unshift File.expand_path('../support', __FILE__)
-Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
+$LOAD_PATH.unshift File.expand_path('support', __dir__)
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].sort.each { |f| require f }
 
 RSpec.configure do |config|
   config.mock_with :mocha

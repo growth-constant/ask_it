@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # frozen_string_literal: trueFactoryBot.define do
 FactoryBot.define do
   factory :survey, class: 'AskIt::Survey' do
@@ -32,17 +34,17 @@ FactoryBot.define do
     end
   end
 
-  factory :section, class:'AskIt::Section' do
+  factory :section, class: 'AskIt::Section' do
     head_number { Faker::Name.name }
     name { Faker::Name.name }
     description { Faker::Lorem.paragraph }
   end
-  
+
   ###
   # Questions
   ###
 
-  factory :question, class:'AskIt::Question' do
+  factory :question, class: 'AskIt::Question' do
     text { Faker::Lorem.paragraph }
     # options { [create(:option)] }
     questions_type_id { AskIt::QuestionType.multiple_choice }
@@ -58,7 +60,7 @@ FactoryBot.define do
       evaluator.options_count.times do
         question.options << build(:option, question: question)
       end
-      
+
       # Ensure at least one correct option
       question.options << build(:option, question: question, correct: true)
     end
@@ -68,11 +70,11 @@ FactoryBot.define do
   # Options
   ###
 
-  factory :predefined_value, class:'AskIt::PredefinedValue' do
+  factory :predefined_value, class: 'AskIt::PredefinedValue' do
     name { Faker::Name.name }
   end
 
-  factory :option, class:'AskIt::Option' do
+  factory :option, class: 'AskIt::Option' do
     text { Faker::Lorem.paragraph }
     options_type_id { AskIt::OptionsType.multi_choices }
     correct { false }
@@ -109,7 +111,7 @@ FactoryBot.define do
 
   factory :lesson, class: 'Lesson' do
     name { Faker::Company.catch_phrase }
-  end # Helper methods
+  end
 
   ###
   # Attempts
@@ -127,14 +129,18 @@ FactoryBot.define do
     after(:build) do |attempt, evaluator|
       if evaluator.answers_array.any?
         evaluator.answers_array.each do |answer|
-          attempt.answers << answer 
+          attempt.answers << answer
         end
       elsif evaluator.all_correct
         correct_options = attempt.survey.correct_options
-        attempt.answers = correct_options.map { |option| build(:answer, option: option, question: option.question, attempt: attempt) }
+        attempt.answers = correct_options.map do |option|
+          build(:answer, option: option, question: option.question, attempt: attempt)
+        end
       else
-        incorrect_options = attempt.survey.correct_options[1..-1]
-        attempt.answers = incorrect_options.map { |option| build(:answer, option: option, question: option.question, attempt: attempt) }
+        incorrect_options = attempt.survey.correct_options[1..]
+        attempt.answers = incorrect_options.map do |option|
+          build(:answer, option: option, question: option.question, attempt: attempt)
+        end
       end
     end
 
@@ -151,14 +157,16 @@ FactoryBot.define do
   # Answers
   ###
 
-  factory :answer, class:'AskIt::Answer' do
+  factory :answer, class: 'AskIt::Answer' do
     trait :with_question_only do
       transient do
         mandatory { false }
         options_type { AskIt::OptionsType.multi_choices }
       end
 
-      question { build(:question, mandatory: mandatory, questions_type_id: AskIt::QuestionType.multiple_choice, options_count: 0) }
+      question do
+        build(:question, mandatory: mandatory, questions_type_id: AskIt::QuestionType.multiple_choice, options_count: 0)
+      end
     end
 
     trait :with_survey_and_section do
@@ -174,34 +182,32 @@ FactoryBot.define do
       option_text { Faker::Lorem.word }
 
       after(:build) do |answer, evaluator|
-        if answer.question.present?
-          answer.question.update(mandatory: evaluator.mandatory)
-        end
+        answer.question.update(mandatory: evaluator.mandatory) if answer.question.present?
       end
     end
 
     trait :with_predefined_value do
       association :predefined_value
     end
-  
+
     trait :with_number_option do
       option { create(:option, options_type_id: AskIt::OptionsType.number, question: question) }
       option_text { nil }
       option_number { Faker::Number.number(digits: 2) }
     end
-  
+
     trait :with_text_option do
       option { create(:option, options_type_id: AskIt::OptionsType.text, question: question) }
       option_text { Faker::Lorem.word }
       option_number { nil }
     end
-  
+
     trait :with_large_text_option do
       option { create(:option, options_type_id: AskIt::OptionsType.large_text, question: question) }
       option_text { Faker::Lorem.paragraph }
       option_number { nil }
     end
-  
+
     trait :with_multi_choices_option do
       option { create(:option, options_type_id: AskIt::OptionsType.multi_choices, question: question) }
       option_text { nil }
@@ -219,7 +225,7 @@ FactoryBot.define do
       option_text { nil }
       option_number { Faker::Number.number(digits: 2) }
     end
-  
+
     trait :with_single_choice_option do
       option { create(:option, options_type_id: AskIt::OptionsType.single_choice, question: question) }
       option_text { nil }
@@ -238,5 +244,4 @@ FactoryBot.define do
       option_number { nil }
     end
   end
-
 end

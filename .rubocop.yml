@@ -1,46 +1,12 @@
-AllCops:
-  TargetRubyVersion: 2.3
-  TargetRailsVersion: 4.0
-  Exclude:
-    - 'tmp/**/*'
-    - 'bin/**/*'
-    - 'db/**/*'
-    - 'test/fixtures/**/*'
-    - 'Gemfile'
-    - 'Rakefile'
-    - 'node_modules/**/*'
-    - 'Vagrantfile'
-Rails:
-  Enabled: true
+inherit_from: .rubocop_todo.yml
 
-Metrics/MethodLength:
-  Max: 35
-Metrics/LineLength:
-  Max: 120
-Metrics/AbcSize:
-  # The ABC size is a calculated magnitude, so this number can be a Fixnum or
-  # a Float.
-  Max: 35
-Metrics/PerceivedComplexity:
-  Max: 10
-Metrics/CyclomaticComplexity:
-  Max: 10
-Metrics/ClassLength:
-  CountComments: false  # count full line comments?
-  Max: 175
-
-Rails/HttpPositionalArguments:
-  # see https://github.com/bbatsov/rubocop/issues/3629, this is for Rails 5 only
-  Enabled: false
-
-Style/NumericLiterals:
-  Enabled: false
-Style/Documentation:
-  Description: 'Document classes and non-namespace modules.'
-  Enabled: false
-Style/AsciiComments:
-  Enabled: false
-Style/StructInheritance:
-  Enabled: false
-Style/ClassAndModuleChildren:
-  Enabled: false
+# The behavior of RuboCop can be controlled via the .rubocop.yml
+# configuration file. It makes it possible to enable/disable
+# certain cops (checks) and to alter their behavior if they accept
+# any parameters. The file can be placed either in your home
+# directory or in some project directory.
+#
+# RuboCop will start looking for the configuration file in the directory
+# where the inspected file is and continue its way up to the root directory.
+#
+# See https://docs.rubocop.org/rubocop/configuration

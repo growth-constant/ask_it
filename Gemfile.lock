@@ -231,6 +231,11 @@ GEM
       unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.32.0)
       parser (>= 3.3.1.0)
+    rubocop-rails (2.26.1)
+      activesupport (>= 4.2.0)
+      rack (>= 1.1)
+      rubocop (>= 1.52.0, < 2.0)
+      rubocop-ast (>= 1.31.1, < 2.0)
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
     simplecov (0.22.0)
@@ -270,6 +275,7 @@ DEPENDENCIES
   rspec (~> 3.13)
   rspec-rails (>= 6.0)
   rubocop
+  rubocop-rails
   simplecov
   sqlite3 (~> 1.7.3)
 

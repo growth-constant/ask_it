@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe AskIt::Survey, type: :model do
-
   it 'should not create a valid survey without sections' do
     survey = build(:survey)
     expect(survey).not_to be_valid
@@ -39,7 +40,7 @@ RSpec.describe AskIt::Survey, type: :model do
   it 'should not save survey without all the needed fields' do
     survey_without_name = build(:survey, name: nil)
     survey_without_description = build(:survey, description: nil)
-    
+
     expect(survey_without_name).not_to be_valid
     expect(survey_without_description).not_to be_valid
   end

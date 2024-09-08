@@ -44,6 +44,9 @@ jobs:
         rubygems: latest
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: true 
+    # lint
+    - name: Run rubocop
+      run: bundle exec rubocop
     # set up gemfile dependencies
     - name: Set up Appraisals dependencies
       run: bundle exec appraisal install

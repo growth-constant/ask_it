@@ -3,7 +3,6 @@
 # Factories
 
 module Factories
-
   # Create a AskIt::Survey
   def create_survey(opts = {})
     AskIt::Survey.create({
@@ -59,7 +58,7 @@ module Factories
   end
 
   def create_attempt(opts = {})
-    attempt = AskIt::Attempt.create do |t|
+    AskIt::Attempt.create do |t|
       t.survey = opts.fetch(:survey, nil)
       t.participant = opts.fetch(:user, nil)
       opts.fetch(:options, []).each do |option|
@@ -89,14 +88,14 @@ module Factories
     if opts.fetch(:all, :wrong) == :right
       correct_survey = survey.correct_options
       create_attempt(options: correct_survey,
-                    user: user,
-                    survey: survey)
+                     user: user,
+                     survey: survey)
     else
       incorrect_survey = survey.correct_options
       incorrect_survey.shift
       create_attempt(options: incorrect_survey,
-                    user: user,
-                    survey: survey)
+                     user: user,
+                     survey: survey)
     end
   end
 

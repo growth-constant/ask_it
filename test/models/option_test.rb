@@ -70,60 +70,60 @@ class OptionTest < ActiveSupport::TestCase
   end
 
   test 'should not create a option with empty or nil text fields for multi_choices or single_choice types' do
-    optionA = create_option(text: '', options_type_id: AskIt::OptionsType.multi_choices)
-    optionB = create_option(text: nil, options_type_id: AskIt::OptionsType.multi_choices)
+    option_a = create_option(text: '', options_type_id: AskIt::OptionsType.multi_choices)
+    option_b = create_option(text: nil, options_type_id: AskIt::OptionsType.multi_choices)
 
-    optionC = create_option(text: '', options_type_id: AskIt::OptionsType.single_choice)
-    optionD = create_option(text: nil, options_type_id: AskIt::OptionsType.single_choice)
+    option_c = create_option(text: '', options_type_id: AskIt::OptionsType.single_choice)
+    option_d = create_option(text: nil, options_type_id: AskIt::OptionsType.single_choice)
 
-    optionE = create_option(text: '', options_type_id: AskIt::OptionsType.multi_choices_with_text)
-    optionF = create_option(text: nil, options_type_id: AskIt::OptionsType.multi_choices_with_text)
+    option_e = create_option(text: '', options_type_id: AskIt::OptionsType.multi_choices_with_text)
+    option_f = create_option(text: nil, options_type_id: AskIt::OptionsType.multi_choices_with_text)
 
-    optionG = create_option(text: '', options_type_id: AskIt::OptionsType.single_choice_with_text)
-    optionH = create_option(text: nil, options_type_id: AskIt::OptionsType.single_choice_with_text)
+    option_g = create_option(text: '', options_type_id: AskIt::OptionsType.single_choice_with_text)
+    option_h = create_option(text: nil, options_type_id: AskIt::OptionsType.single_choice_with_text)
 
-    optionI = create_option(text: '', options_type_id: AskIt::OptionsType.multi_choices_with_number)
-    optionJ = create_option(text: nil, options_type_id: AskIt::OptionsType.multi_choices_with_number)
+    option_i = create_option(text: '', options_type_id: AskIt::OptionsType.multi_choices_with_number)
+    option_j = create_option(text: nil, options_type_id: AskIt::OptionsType.multi_choices_with_number)
 
-    optionK = create_option(text: '', options_type_id: AskIt::OptionsType.single_choice_with_number)
-    optionL = create_option(text: nil, options_type_id: AskIt::OptionsType.single_choice_with_number)
+    option_k = create_option(text: '', options_type_id: AskIt::OptionsType.single_choice_with_number)
+    option_l = create_option(text: nil, options_type_id: AskIt::OptionsType.single_choice_with_number)
 
-    should_not_be_persisted optionA
-    should_not_be_persisted optionB
+    should_not_be_persisted option_a
+    should_not_be_persisted option_b
 
-    should_not_be_persisted optionC
-    should_not_be_persisted optionD
+    should_not_be_persisted option_c
+    should_not_be_persisted option_d
 
-    should_not_be_persisted optionE
-    should_not_be_persisted optionF
+    should_not_be_persisted option_e
+    should_not_be_persisted option_f
 
-    should_not_be_persisted optionG
-    should_not_be_persisted optionH
+    should_not_be_persisted option_g
+    should_not_be_persisted option_h
 
-    should_not_be_persisted optionI
-    should_not_be_persisted optionJ
+    should_not_be_persisted option_i
+    should_not_be_persisted option_j
 
-    should_not_be_persisted optionK
-    should_not_be_persisted optionL
+    should_not_be_persisted option_k
+    should_not_be_persisted option_l
   end
 
   test 'should be true if option A is correct and option B incorrect' do
-    optionA = create_option(correct: false)
-    optionB = create_option(correct: true)
+    option_a = create_option(correct: false)
+    option_b = create_option(correct: true)
 
-    should_be_false optionA.correct?
-    should_be_true  optionB.correct?
+    should_be_false option_a.correct?
+    should_be_true  option_b.correct?
   end
 
   # correct => default weight is 1
   # incorrect => default weight is 0
   test 'should be true weights are synchronized with the correct flag' do
-    optionA = create_option(correct: false)
-    optionB = create_option(correct: true)
-    optionC = create_option(correct: true, weight: 5)
+    option_a = create_option(correct: false)
+    option_b = create_option(correct: true)
+    option_c = create_option(correct: true, weight: 5)
 
-    should_be_true (optionA.weight == 0)
-    should_be_true (optionB.weight == 1)
-    should_be_true (optionC.weight == 5)
+    should_be_true(option_a.weight.zero?)
+    should_be_true(option_b.weight == 1)
+    should_be_true(option_c.weight == 5)
   end
 end

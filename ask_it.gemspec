@@ -1,7 +1,6 @@
-# -*- encoding: utf-8 -*-
 # frozen_string_literal: true
 
-$LOAD_PATH.push File.expand_path('../lib', __FILE__)
+$LOAD_PATH.push File.expand_path('lib', __dir__)
 require 'ask_it/version'
 
 Gem::Specification.new do |s|
@@ -19,14 +18,15 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 2.7.8'
 
   s.add_dependency('rails', '>= 6.1')
-  s.add_development_dependency('mocha')
-  s.add_development_dependency('faker')
-  s.add_development_dependency('rake')
-  s.add_development_dependency('pry')
-  s.add_development_dependency "appraisal", "~> 2.5.0"
+  s.add_development_dependency 'appraisal', '~> 2.5.0'
   s.add_development_dependency('factory_bot')
-  s.add_development_dependency('rubocop')
+  s.add_development_dependency('faker')
+  s.add_development_dependency('mocha')
+  s.add_development_dependency('pry')
+  s.add_development_dependency('rake')
   s.add_development_dependency('rspec', '~> 3.13')
   s.add_development_dependency('rspec-rails', '>= 6.0')
+  s.add_development_dependency('rubocop')
+  s.add_development_dependency('rubocop-rails')
   s.add_development_dependency('simplecov')
 end

@@ -82,7 +82,7 @@ jobs:
       uses: ./.github/actions/download-test-reporter
     - name: Sum coverage
       run: |
-        ./cc-test-reporter format-coverage coverage/coverage-* --input-type simplecov --output coverage/codeclimate.json
+        ./cc-test-reporter format-coverage coverage* --input-type simplecov --output coverage/codeclimate.json
         ./cc-test-reporter sum-coverage coverage/codeclimate.json --parts 3 --output coverage/summed-coverage.json
     - name: Upload summed coverage to Code Climate
       run: |

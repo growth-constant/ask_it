@@ -102,9 +102,14 @@ jobs:
       run: ls -laR coverage*
     - name: Download cc-test-reporter
       uses: ./.github/actions/download-test-reporter
+    - name: Format coverage
+      run: |
+        find coverage -name ".resultset.json" -exec ./cc-test-reporter format-coverage {} --input-type simplecov --output coverage/codeclimate.json \;
+    # list the coverage files
+    - name: List coverage files
+      run: ls -laR coverage
     - name: Sum coverage
       run: |
-        ./cc-test-reporter format-coverage coverage/coverage-*/.resultset.json --input-type simplecov --output coverage/codeclimate.json
         ./cc-test-reporter sum-coverage coverage/codeclimate.json --parts 3 --output coverage/summed-coverage.json
     - name: Upload summed coverage to Code Climate
       run: |

@@ -51,34 +51,45 @@ jobs:
     - name: Set up Appraisals dependencies
       run: bundle exec appraisal install
     # download cc-test-reporter
-    - name: "Download cc-test-reporter from codeclimate.com"
-      run: |
-        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-        chmod +x ./cc-test-reporter
+    - name: Download cc-test-reporter
+      uses: ./.github/actions/download-test-reporter
     - name: "Report to Code Climate that we will send a coverage report."
       run: ./cc-test-reporter before-build
     # run tests
     - name: Run tests
       run: COVERAGE=1 bundle exec appraisal rspec
-    # upload coverage to github to upload artifact with ruby version
+    # upload coverage to GitHub to upload artifact with ruby version
     - name: Upload coverage to GitHub
       uses: actions/upload-artifact@v4
       with:
         name: coverage-${{ matrix.ruby }}
+        path: coverage/.resultset.json
+
+  sum-coverage:
+    needs: matrix-test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Download all coverage artifacts
+      uses: actions/download-artifact@v4
+      with:
         path: coverage
-    - name: List artifacts
-      run: ls -la ./coverage/
-    # upload code coverage to Code Climate
-    - name: Upload code coverage to Code Climate
+    - name: Download cc-test-reporter
+      uses: ./.github/actions/download-test-reporter
+    - name: Sum coverage
       run: |
-        ./cc-test-reporter after-build \
-          --coverage-input-type simplecov \
-          ./coverage/.resultset.json
+        ./cc-test-reporter format-coverage coverage/coverage-*/coverage/.resultset.json --input-type simplecov --output coverage/codeclimate.json
+        ./cc-test-reporter sum-coverage coverage/codeclimate.json --parts 3 --output coverage/summed-coverage.json
+    - name: Upload summed coverage to Code Climate
+      run: |
+        ./cc-test-reporter upload-coverage --input coverage/summed-coverage.json
+
   required-checks:
     runs-on: ubuntu-latest
     if: ${{ always() }}
     needs:
       - matrix-test
+      - sum-coverage
     steps:
       - name: failure
         if: ${{ failure() || contains(needs.*.result, 'failure') }}

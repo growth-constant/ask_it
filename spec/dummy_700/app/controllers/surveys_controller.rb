@@ -1,4 +1,6 @@
-class SurveysController < AskIt::SurveysController 
+class SurveysController < AskIt::SurveysController
+  include AskIt::SurveysHelper
+  helper 'ask_it/surveys'
   # GET /resource/surveys
   # def index
   #   super

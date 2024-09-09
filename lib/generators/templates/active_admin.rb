@@ -52,7 +52,7 @@ ActiveAdmin.register AskIt::Survey do
           q.input :locale_text
           q.input :description
           q.input :locale_description
-          q.input :questions_type_id, as: :select, collection: AskIt::QuestionsType.questions_types_title
+          q.input :questions_type_id, as: :select, collection: AskIt::QuestionType.questions_types_title
           q.input :mandatory
 
           q.inputs I18n.t('predefined_values') do

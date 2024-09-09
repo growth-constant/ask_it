@@ -35,6 +35,7 @@ module AskIt
       scope = get_scope
       generate_controller(scope)
       generate_views(scope)
+      generate_helpers(scope)
       generate_routes_for(scope)
     end
 
@@ -45,6 +46,11 @@ module AskIt
     def generate_controller(scope)
       template 'controllers/surveys_controller.rb', controller_path(scope)
       template 'controllers/attempts_controller.rb', attempts_controller_path(scope)
+    end
+
+    def generate_helpers(_scope)
+      survey_helper_path = 'app/helpers/ask_it/surveys_helper.rb'
+      template 'helpers/ask_it/surveys_helper.rb', survey_helper_path
     end
 
     def generate_views(scope)
@@ -76,6 +82,10 @@ module AskIt
 
     def get_scope
       arguments.size > 1 ? arguments[1] : nil
+    end
+
+    def get_scope_path
+      get_scope.present? ? "#{get_scope}_" : ''
     end
 
     def get_controller_scope

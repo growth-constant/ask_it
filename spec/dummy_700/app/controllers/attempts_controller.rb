@@ -1,4 +1,5 @@
-class AttemptsController < AskIt::AttemptsController 
+class AttemptsController < AskIt::AttemptsController
+  include AskIt::SurveysHelper
   # GET /resource/attempts/new
   # def new
   #   @survey =  AskIt::Survey.active.last

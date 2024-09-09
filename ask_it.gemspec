@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('faker')
   s.add_development_dependency('mocha')
   s.add_development_dependency('pry')
+  s.add_development_dependency('puma')
   s.add_development_dependency('rake')
   s.add_development_dependency('rspec', '~> 3.13')
   s.add_development_dependency('rspec-rails', '>= 6.0')

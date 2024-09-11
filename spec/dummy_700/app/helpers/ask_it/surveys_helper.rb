@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module AskIt
   module SurveysHelper
-    def link_to_remove_field(name, f)
-      f.hidden_field(:_destroy) +
+    def link_to_remove_field(name, field)
+      field.hidden_field(:_destroy) +
         link_to_function(raw(name), 'removeField(this)', id: 'remove-attach')
     end
 
@@ -33,10 +35,10 @@ module AskIt
       end
     end
 
-    def link_to_add_field(name, f, association)
-      new_object = f.object.class.reflect_on_association(association).klass.new
-      fields = f.fields_for(association, new_object, child_index: "new_#{association}") do |builder|
-        render(association.to_s.singularize + '_fields', f: builder)
+    def link_to_add_field(name, field, association)
+      new_object = field.object.class.reflect_on_association(association).klass.new
+      fields = field.fields_for(association, new_object, child_index: "new_#{association}") do |builder|
+        render("#{association.to_s.singularize}_fields", f: builder)
       end
       link_to_function(name, "addField(this, \"#{association}\", \"#{escape_javascript(fields)}\")",
                        id: 'add-attach',

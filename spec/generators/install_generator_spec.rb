@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'generator_spec'
 require 'generators/ask_it/install_generator'
@@ -32,7 +34,7 @@ RSpec.describe AskIt::Generators::InstallGenerator, type: :generator do
     run_generator
 
     migration_files = Dir.glob("#{destination_root}/db/migrate/*")
-    unique_migration_names = migration_files.map { |f| f.split('_')[1..-1].join('_') }.uniq
+    unique_migration_names = migration_files.map { |f| f.split('_')[1..].join('_') }.uniq
     expect(unique_migration_names.size).to eq(7)
   end
 

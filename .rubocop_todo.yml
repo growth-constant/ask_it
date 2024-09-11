@@ -124,3 +124,9 @@ Style/OptionalBooleanParameter:
 # URISchemes: http, https
 Layout/LineLength:
   Max: 160
+  Exclude:
+    - 'gemfiles/bin/bundle'
+
+AllCops:
+  Exclude:
+    - 'lib/generators/templates/**/*'

@@ -33,7 +33,7 @@ module AskIt
       def migration_version
         return unless rails5_and_up?
 
-        puts "#{Rails::VERSION}"
+        puts(Rails::VERSION)
 
         "[#{Rails::VERSION::MAJOR}.#{Rails::VERSION::MINOR}]"
       end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AttemptsController < AskIt::AttemptsController
   include AskIt::SurveysHelper
   # GET /resource/attempts/new

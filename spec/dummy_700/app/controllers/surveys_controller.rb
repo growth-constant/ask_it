@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SurveysController < AskIt::SurveysController
   include AskIt::SurveysHelper
   helper 'ask_it/surveys'

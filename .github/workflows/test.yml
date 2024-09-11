@@ -47,13 +47,6 @@ jobs:
     # lint
     - name: Run rubocop
       run: bundle exec rubocop
-    # print the GEM_HOME, GEM_PATH and BUNDLE_PATH in one step with bundle exec with ENV
-    # values
-    - name: Print GEM_HOME, GEM_PATH and BUNDLE_PATH
-      run: |
-        bundle exec ruby -e 'puts "GEM_HOME: $GEM_HOME"'
-        bundle exec ruby -e 'puts "GEM_PATH: $GEM_PATH"'
-        bundle exec ruby -e 'puts "BUNDLE_PATH: $BUNDLE_PATH"'
     # check if there is a cache for the gemfiles/gem of the appraisals and ruby version
     - name: Restore cache for Appraisal gems and gemfiles
       id: cache-appraisal
@@ -66,9 +59,20 @@ jobs:
         key: ask-it-${{ runner.os }}-appraisal-${{ matrix.ruby }}-${{ hashFiles('Appraisals', 'Gemfile', 'Gemfile.lock') }}
         restore-keys: |
           ask-it-${{ runner.os }}-appraisal-${{ matrix.ruby }}-
+    - name: Debug Appraisal environment
+      run: |
+        echo "Ruby version: $(ruby -v)"
+        echo "Bundler version: $(bundle -v)"
+        echo "Appraisal version: $(bundle exec appraisal --version)"
+        echo "BUNDLE_PATH: $BUNDLE_PATH"
+        echo "BUNDLE_GEMFILE: $BUNDLE_GEMFILE"
+        bundle config list
+        ls -R vendor/bundle
     # set up gemfile dependencies
     - name: Set up Appraisals dependencies
-      run: bundle exec appraisal install
+      run: |
+        bundle config set --local path 'vendor/bundle'
+        bundle exec appraisal install
     # cache the gemfiles/gem of the appraisals and the gem of the app
     - name: Cache Appraisal gems and gemfiles post-install
       uses: actions/cache/save@v4

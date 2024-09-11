@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe AskIt::Attempt, type: :model do
+RSpec.describe AskIt::Attempt do
   describe 'validations' do
     def number_of_attempts
       5

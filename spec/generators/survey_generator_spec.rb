@@ -11,9 +11,7 @@ RSpec.describe AskIt::SurveyGenerator, type: :generator do
     prepare_destination
     # create an empty config/routes.rb file with the correct structure
     FileUtils.mkdir_p(File.join(destination_root, 'config'))
-    File.open(File.join(destination_root, 'config', 'routes.rb'), 'w') do |f|
-      f.write("Rails.application.routes.draw do\nend\n")
-    end
+    File.write(File.join(destination_root, 'config', 'routes.rb'), "Rails.application.routes.draw do\nend\n")
     allow(Rails).to receive(:root).and_return(Pathname.new(destination_root))
   end
 

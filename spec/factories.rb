@@ -187,7 +187,7 @@ FactoryBot.define do
     end
 
     trait :with_predefined_value do
-      association :predefined_value
+      predefined_value
     end
 
     trait :with_number_option do

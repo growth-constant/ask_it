@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe AskIt::Option, type: :model do
+RSpec.describe AskIt::Option do
   describe 'validations' do
     it 'creates a valid option' do
       option = create(:option)

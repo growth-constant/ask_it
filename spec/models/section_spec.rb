@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe AskIt::Section, type: :model do
+RSpec.describe AskIt::Section do
   describe 'validations' do
     it 'does not create a valid section without questions' do
       section = build(:section)

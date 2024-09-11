@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe AskIt::Answer, type: :model do
+RSpec.describe AskIt::Answer do
   describe 'validations' do
     it 'creates a valid answer' do
       answer = create(:answer, :with_survey_and_section)

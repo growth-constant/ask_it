@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe AskIt::Question, type: :model do
+RSpec.describe AskIt::Question do
   describe 'validations' do
     it 'creates a valid question' do
       question = create(:question)

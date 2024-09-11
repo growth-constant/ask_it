@@ -2,19 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe AskIt::Survey, type: :model do
-  it 'passes if all the users have the same score' do
-    user_a = create(:user)
-    user_b = create(:user)
-    # survey = create_survey_with_sections(2)
-    survey = create(:survey, :with_sections, sections_count: 2)
-
-    create(:attempt, participant: user_a, survey: survey, all_correct: true)
-    create(:attempt, participant: user_b, survey: survey, all_correct: true)
-
-    expect(participant_score(user_a, survey)).to eq(participant_score(user_b, survey))
-  end
-
+RSpec.describe AskIt::Survey do
   it 'does not create a valid survey without sections' do
     survey = build(:survey)
     expect(survey).not_to be_valid

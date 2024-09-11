@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe AskIt::PredefinedValue, type: :model do
+RSpec.describe AskIt::PredefinedValue do
   describe 'validations' do
     it 'creates a valid predefined_value' do
       predefined_value = create(:predefined_value)

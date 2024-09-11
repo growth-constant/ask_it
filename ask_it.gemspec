@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'appraisal', '~> 2.5.0'
   s.add_development_dependency('factory_bot')
   s.add_development_dependency('faker')
+  s.add_development_dependency('generator_spec')
   s.add_development_dependency('mocha')
   s.add_development_dependency('pry')
   s.add_development_dependency('puma')

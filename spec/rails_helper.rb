@@ -52,7 +52,7 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
-  config.mock_with :mocha
+  config.mock_with :rspec
   # setup factory bot
   config.include FactoryBot::Syntax::Methods
   config.include Support::ModelsCreate

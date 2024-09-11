@@ -47,6 +47,12 @@ jobs:
     # lint
     - name: Run rubocop
       run: bundle exec rubocop
+    # print the GEM_HOME, GEM_PATH and BUNDLE_PATH in one step
+    - name: Print GEM_HOME, GEM_PATH and BUNDLE_PATH
+      run: |
+        echo "GEM_HOME: $GEM_HOME"
+        echo "GEM_PATH: $GEM_PATH"
+        echo "BUNDLE_PATH: $BUNDLE_PATH"
     # check if there is a cache for the gemfiles/gem of the appraisals and ruby version
     - name: Restore cache for Appraisal gems and gemfiles
       id: cache-appraisal

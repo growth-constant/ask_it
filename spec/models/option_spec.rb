@@ -4,71 +4,71 @@ require 'rails_helper'
 
 RSpec.describe AskIt::Option, type: :model do
   describe 'validations' do
-    it 'should create a valid option' do
+    it 'creates a valid option' do
       option = create(:option)
       expect(option).to be_persisted
     end
 
-    it 'should create a valid option with multi choices type' do
+    it 'creates a valid option with multi choices type' do
       option = create(:option, options_type_id: AskIt::OptionsType.multi_choices)
 
       expect(option).to be_persisted
       expect(option.options_type_id).to eq(AskIt::OptionsType.multi_choices)
     end
 
-    it 'should create a valid option with single choice type' do
+    it 'creates a valid option with single choice type' do
       option = create(:option, options_type_id: AskIt::OptionsType.single_choice)
 
       expect(option).to be_persisted
       expect(option.options_type_id).to eq(AskIt::OptionsType.single_choice)
     end
 
-    it 'should create a valid option with number type' do
+    it 'creates a valid option with number type' do
       option = create(:option, options_type_id: AskIt::OptionsType.number)
 
       expect(option).to be_persisted
       expect(option.options_type_id).to eq(AskIt::OptionsType.number)
     end
 
-    it 'should create a valid option with text type' do
+    it 'creates a valid option with text type' do
       option = create(:option, options_type_id: AskIt::OptionsType.text)
 
       expect(option).to be_persisted
       expect(option.options_type_id).to eq(AskIt::OptionsType.text)
     end
 
-    it 'should create a valid option with large_text type' do
+    it 'creates a valid option with large_text type' do
       option = create(:option, options_type_id: AskIt::OptionsType.large_text)
 
       expect(option).to be_persisted
       expect(option.options_type_id).to eq(AskIt::OptionsType.large_text)
     end
 
-    it 'should not create an option with an unaccepted type' do
+    it 'does not create an option with an unaccepted type' do
       option = build(:option, options_type_id: 99)
 
       expect(option).not_to be_valid
     end
 
-    it 'should not create an option with an empty or nil options_type_id field' do
+    it 'does not create an option with an empty or nil options_type_id field' do
       option = build(:option, options_type_id: nil)
 
       expect(option).not_to be_valid
     end
 
-    context 'text field validations' do
-      it 'should create an option with empty or nil text fields for text or number types' do
-        option_a = create(:option, text: '', options_type_id: AskIt::OptionsType.text)
-        option_b = create(:option, text: nil, options_type_id: AskIt::OptionsType.text)
-        option_c = create(:option, text: '', options_type_id: AskIt::OptionsType.number)
-        option_d = create(:option, text: nil, options_type_id: AskIt::OptionsType.number)
+    context 'when validating text fields' do
+      it 'creates options with empty or nil text fields for text or number types' do
+        options = [
+          create(:option, text: '', options_type_id: AskIt::OptionsType.text),
+          create(:option, text: nil, options_type_id: AskIt::OptionsType.text),
+          create(:option, text: '', options_type_id: AskIt::OptionsType.number),
+          create(:option, text: nil, options_type_id: AskIt::OptionsType.number)
+        ]
 
-        [option_a, option_b, option_c, option_d].each do |option|
-          expect(option).to be_persisted
-        end
+        expect(options).to all(be_persisted)
       end
 
-      it 'should not create an option with empty or nil text fields for multi_choices or single_choice types' do
+      it 'does not create an option with empty or nil text fields for multi_choices or single_choice types' do
         invalid_types = [
           AskIt::OptionsType.multi_choices,
           AskIt::OptionsType.single_choice,
@@ -90,7 +90,7 @@ RSpec.describe AskIt::Option, type: :model do
   end
 
   describe 'correct flag' do
-    it 'should be true if option is set as correct and false if set as incorrect' do
+    it 'is true if option is set as correct and false if set as incorrect' do
       option_a = create(:option, correct: false)
       option_b = create(:option, correct: true)
 
@@ -100,7 +100,7 @@ RSpec.describe AskIt::Option, type: :model do
   end
 
   describe 'weight synchronization' do
-    it 'should synchronize weights with the correct flag' do
+    it 'synchronizes weights with the correct flag' do
       option_a = create(:option, correct: false)
       option_b = create(:option, correct: true)
       option_c = create(:option, correct: true, weight: 5)

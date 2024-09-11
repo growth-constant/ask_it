@@ -7,7 +7,7 @@ require 'generators/ask_it/install_generator'
 RSpec.describe AskIt::Generators::InstallGenerator, type: :generator do
   destination File.expand_path('../../../tmp', __dir__)
 
-  before(:each) do
+  before do
     prepare_destination
   end
 

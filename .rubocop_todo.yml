@@ -130,3 +130,15 @@ Layout/LineLength:
 AllCops:
   Exclude:
     - 'lib/generators/templates/**/*'
+
+RSpec/ExampleLength:
+  Max: 30 
+
+RSpec/MultipleExpectations:
+  Max: 3
+
+RSpec/SpecFilePathFormat:
+  Exclude:
+    - 'spec/generators/install_generator_spec.rb'
+    - 'spec/generators/survey_generator_spec.rb'
+    - 'spec/models/*.rb'

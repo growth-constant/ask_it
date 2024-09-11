@@ -7,7 +7,7 @@ require 'generators/ask_it/survey_generator'
 RSpec.describe AskIt::SurveyGenerator, type: :generator do
   destination File.expand_path('../../../tmp', __dir__)
 
-  before(:each) do
+  before do
     prepare_destination
     # create an empty config/routes.rb file with the correct structure
     FileUtils.mkdir_p(File.join(destination_root, 'config'))

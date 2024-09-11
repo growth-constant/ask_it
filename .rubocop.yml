@@ -13,3 +13,14 @@ inherit_from: .rubocop_todo.yml
 
 AllCops:
   NewCops: disable
+  Exclude:
+    - 'bin/**/*'
+    - 'gemfiles/bin/**/*'
+    - 'gemfiles/**/*'
+    - 'lib/generators/templates/**/*'
+
+require:
+  - rubocop-factory_bot
+  - rubocop-rspec_rails
+  - rubocop-rake
+  - rubocop-rspec

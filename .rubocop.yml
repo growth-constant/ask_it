@@ -19,6 +19,7 @@ AllCops:
     - 'gemfiles/**/*'
     - 'lib/generators/templates/**/*'
     - 'spec/dummy_*/**/*'
+    - 'vendor/**/*'
 
 require:
   - rubocop-factory_bot

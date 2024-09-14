@@ -8,10 +8,20 @@ ENV['RAILS_ENV'] ||= 'test'
 require 'simplecov'
 SimpleCov.start 'rails' do
   enable_coverage :branch
-  add_filter '/test/'
-  add_filter '/config/'
-  add_filter '/vendor/'
-  add_filter '/spec/'
+  add_filter 'test/'
+  add_filter 'config/'
+  add_filter 'vendor/'
+  add_filter 'spec/'
+  add_filter '.github/'
+  add_filter 'lib/tasks/'
+  add_filter 'gemfiles/'
+  add_filter 'Gemfile'
+  add_filter 'Rakefile'
+  add_filter '*.gemspec'
+  add_filter '.rubocop.yml'
+  add_filter '.rubocop_todo.yml'
+  add_filter '*.md'
+  add_filter 'lib/generators/'
 end
 
 def transform_gemfile_path(path)

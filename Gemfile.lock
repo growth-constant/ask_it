@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     ask_it (1.0.7)
-      rails (>= 6.1)
+      rails (>= 6.1, < 7.2)
 
 GEM
   remote: https://rubygems.org/

@@ -82,53 +82,30 @@ jobs:
           gemfiles/*.gemfile
           gemfiles/*.gemfile.lock
         key: ask-it-${{ runner.os }}-appraisal-${{ matrix.ruby }}-${{ hashFiles('Appraisals', 'Gemfile', 'Gemfile.lock') }}
+
     # download cc-test-reporter an
     - name: Download cc-test-reporter
       uses: ./.github/actions/download-test-reporter
+
+    # report to Code Climate that we will send a coverage report.
     - name: "Report to Code Climate that we will send a coverage report."
       run: ./cc-test-reporter before-build
+
     # run tests
     - name: Run tests
       run: COVERAGE=1 bundle exec appraisal rspec
-    # upload coverage to GitHub to upload artifact with ruby version
-    - name: Upload coverage to GitHub
-      uses: actions/upload-artifact@v4
-      with:
-        name: coverage-${{ matrix.ruby }}
-        path: ./coverage/.resultset.json
-        if-no-files-found: error
-        include-hidden-files: true
 
-  sum-coverage:
-    needs: matrix-test
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - name: Download all coverage artifacts
-      uses: actions/download-artifact@v4
-      with:
-        path: coverage
-    - name: Download cc-test-reporter
-      uses: ./.github/actions/download-test-reporter
-    - name: Format coverage
+    # upload after-build coverage to Code Climate
+    - name: Upload after-build coverage to Code Climate
       run: |
-        find coverage -name ".resultset.json" -exec ./cc-test-reporter format-coverage {} --input-type simplecov --output coverage/codeclimate.json \;
-    # list the coverage files
-    - name: List coverage files
-      run: ls -laR coverage/
-    - name: Sum coverage
-      run: |
-        ./cc-test-reporter sum-coverage coverage/codeclimate.json --parts 3 --output coverage/summed-coverage.json
-    - name: Upload summed coverage to Code Climate
-      run: |
-        ./cc-test-reporter upload-coverage --input coverage/summed-coverage.json
+        ./cc-test-reporter after-build
 
-  required-checks:
+  # if any of the matrix-test jobs failed, we fail the required-checks-and-release job
+  required-checks-and-release:
     runs-on: ubuntu-latest
     if: ${{ always() }}
     needs:
       - matrix-test
-      - sum-coverage
     steps:
       - name: failure
         if: ${{ failure() || contains(needs.*.result, 'failure') }}

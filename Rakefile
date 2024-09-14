@@ -9,16 +9,15 @@ end
 
 require 'rake'
 require 'rdoc/task'
-require 'rake/testtask'
+require 'rspec/core/rake_task'
+load 'tasks/changelog.rake'
 
-Rake::TestTask.new(:test) do |t|
-  t.libs << 'lib'
-  t.libs << 'test'
-  t.pattern = 'test/**/*_test.rb'
-  t.verbose = true
+desc 'Run all specs across all appraisals'
+task :spec do
+  sh 'bundle exec appraisal rspec'
 end
 
-task default: :test
+task default: :spec
 
 Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'rdoc'

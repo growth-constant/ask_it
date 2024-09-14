@@ -10,6 +10,8 @@ end
 require 'rake'
 require 'rdoc/task'
 require 'rspec/core/rake_task'
+require 'bundler/gem_tasks'
+
 load 'tasks/changelog.rake'
 
 desc 'Run all specs across all appraisals'

@@ -12,12 +12,12 @@ Gem::Specification.new do |s|
   s.authors     = 'Victor'
   s.email       = 'victor@joinbuildit.com'
   s.homepage    = 'https://github.com/'
-  s.licenses    = 'LICENSE.md'
+  s.licenses    = 'MITNFA'
   s.require_paths = %w[lib app]
   # add ruby version to the gemspec
   s.required_ruby_version = '>= 2.7.8'
 
-  s.add_dependency('rails', '>= 6.1')
+  s.add_dependency('rails', '>= 6.1', '< 7.2')
   s.add_development_dependency 'appraisal', '~> 2.5.0'
   s.add_development_dependency('factory_bot')
   s.add_development_dependency('faker')

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # lib/tasks/changelog.rake
 require 'github_changelog_generator/task'
 

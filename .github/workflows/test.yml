@@ -59,15 +59,6 @@ jobs:
         key: ask-it-${{ runner.os }}-appraisal-${{ matrix.ruby }}-${{ hashFiles('Appraisals', 'Gemfile', 'Gemfile.lock') }}
         restore-keys: |
           ask-it-${{ runner.os }}-appraisal-${{ matrix.ruby }}-
-    - name: Debug Appraisal environment
-      run: |
-        echo "Ruby version: $(ruby -v)"
-        echo "Bundler version: $(bundle -v)"
-        echo "Appraisal version: $(bundle exec appraisal --version)"
-        echo "BUNDLE_PATH: $BUNDLE_PATH"
-        echo "BUNDLE_GEMFILE: $BUNDLE_GEMFILE"
-        bundle config list
-        ls -R vendor/bundle
     # set up gemfile dependencies
     - name: Set up Appraisals dependencies
       run: |
